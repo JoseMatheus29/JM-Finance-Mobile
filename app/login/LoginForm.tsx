@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Alert, ActivityIndicator ,Image } from 'react-native';
-import { styles } from './styles';
+import { authStyles } from '../style/authStyles';
+import { globalStyles } from '../style/globalStyles';
+
 import { mockLogin } from '../../services/mockAuthService'; 
 import { saveToken } from '../../services/storage'; 
 import { useRouter } from 'expo-router';
@@ -34,10 +36,10 @@ export const LoginForm = () => {
 
     return (
         <View>
-            <Text style={styles.label}>Email</Text>
-            <View style={styles.passwordContainer}>
+            <Text style={globalStyles.label}>Email</Text>
+            <View style={authStyles.passwordContainer}>
                 <TextInput
-                    style={styles.input}
+                    style={authStyles.input}
                     placeholder="Digite seu email"
                     placeholderTextColor="#ccc"
                     value={email}
@@ -47,10 +49,10 @@ export const LoginForm = () => {
                 />
             </View>
 
-            <Text style={styles.label}>Senha</Text>
-            <View style={styles.passwordContainer}>
+            <Text style={globalStyles.label}>Senha</Text>
+            <View style={authStyles.passwordContainer}>
                 <TextInput
-                    style={styles.input}
+                    style={authStyles.input}
                     placeholder="Digite sua senha"
                     placeholderTextColor="#ccc"
                     value={password}
@@ -58,18 +60,18 @@ export const LoginForm = () => {
                     secureTextEntry={!showPassword}
                 />
                 <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
-                    <Text style={styles.showPassword}>
+                    <Text style={authStyles.showPassword}>
                     <Image source={require('../../assets/images/Show.png')}  />
 
                     </Text>
                 </TouchableOpacity>
             </View>
 
-            <TouchableOpacity style={styles.button} onPress={handleLogin} disabled={loading}>
+            <TouchableOpacity style={globalStyles.button} onPress={handleLogin} disabled={loading}>
                 {loading ? (
                     <ActivityIndicator color="#FFF" />
                 ) : (
-                    <Text style={styles.buttonText}>Entrar</Text>
+                    <Text style={globalStyles.buttonText}>Entrar</Text>
                 )}
             </TouchableOpacity>
         </View>
