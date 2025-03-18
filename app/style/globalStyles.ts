@@ -1,23 +1,83 @@
 import { StyleSheet } from 'react-native';
 
 export const globalStyles = StyleSheet.create({
-    container: {
+    pageConfig: {
+        backgroundColor: "#fffF",
         flex: 1,
-        backgroundColor: '#fff',
-        paddingHorizontal: 20,
-        paddingTop: 40,
+        padding: 15,
+        width: "100%",
+        display: 'flex',
     },
+
+    formContainer: {
+        flex: 1,
+        justifyContent: 'center',
+    },
+
+    container: {
+        borderRadius: 24,
+        marginBottom: 15,
+        padding: 15,
+        width: "100%",
+    },
+
+
     title: {
-        fontSize: 22,
-        fontWeight: 'bold',
-        textAlign: 'center',
-        color: '#3366CC',
+        marginBottom: 15,
+        fontSize: 24,
+        fontFamily: "Inter",
+        fontWeight: "bold",
+        color: "#3161b2",
+        textAlign: "left",
+        borderRadius: 24
     },
+    subtitle: {
+        fontFamily: "Inter",
+        fontSize: 14,
+        fontWeight: "500",
+        color: "#292b2d",
+        textAlign: "left",
+        marginBottom: 15,
+        width: '100%',
+        borderRadius: 24
+    },
+
+
+
+    label: {
+        fontFamily: "Inter",
+        fontWeight: "medium",
+        fontSize: 13,
+        color: "#3161b2",
+    },
+    sectionTitle: {
+        fontFamily: "Inter",
+        fontSize: 16,
+        lineHeight: 20,
+        fontWeight: "bold",
+        color: "#3161b2",
+        textAlign: "center",
+        marginBottom: 10,
+    },
+
+    groupTitle: {
+        fontFamily: "Inter",
+        fontSize: 16,
+        lineHeight: 20,
+        fontWeight: "bold",
+        color: "#3161b2",
+        textAlign: "left",
+        marginBottom: 10,
+    },
+
+
     button: {
         backgroundColor: '#3366CC',
-        padding: 15,
+        paddingVertical: 15,
+        paddingHorizontal: 50,
         borderRadius: 30,
         marginTop: 20,
+        width: "100%",
         alignItems: 'center',
     },
     buttonText: {
@@ -25,20 +85,7 @@ export const globalStyles = StyleSheet.create({
         fontSize: 16,
         fontWeight: 'bold',
     },
-    label: {
-        fontSize: 16,
-        fontWeight: 'bold',
-        marginBottom: 5,
-    },
-    sectionTitle: {
-        fontSize: 18,
-        fontWeight: 'bold',
-        marginTop: 20,
-    },
-    subtitle: {
-        fontSize: 14,
-        color: '#666',
-        marginBottom: 30,
-    },
 });
+
+
 export default globalStyles; 
