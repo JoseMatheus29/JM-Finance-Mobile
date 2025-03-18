@@ -15,8 +15,8 @@ export default function DashboardScreen() {
         <View style={{ flex: 1 }}>
 
             <View style={globalStyles.pageConfig}>
-                <View style={{ flexDirection: "row", paddingStart: 15, marginBottom: 20, justifyContent: "space-between" }}>
-                    <ArrowBack />
+                <View style={{flexDirection:"row",paddingStart:15,marginBottom:20, justifyContent: "space-between"}}>
+                <ArrowBack />
                     <Text style={globalStyles.sectionTitle}>Dashboard</Text>
                     <Text ></Text>
 

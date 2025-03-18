@@ -18,9 +18,18 @@ export const globalStyles = StyleSheet.create({
         borderRadius: 24,
         marginBottom: 15,
         padding: 15,
-        width: "100%"
+        width: "100%",
+      
+
     },
 
+    inputContainer:{
+          backgroundColor: "#EBF1F6"
+    },
+    selectedValue: {
+        marginTop: 20,
+        fontSize: 18,
+      },
 
     title: {
         marginBottom: 15,
