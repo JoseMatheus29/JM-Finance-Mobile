@@ -41,8 +41,8 @@ export const LoginForm = () => {
                 <Text style={globalStyles.subtitle}>
                     Olá, preencha seus dados para voltar a gerenciar sua vida financeira!
                 </Text>
-                <View style={globalStyles.container}>
-                    <Text style={globalStyles.label}>Email</Text>
+                <View style={[globalStyles.container, authStyles.containerLogin]}>
+                <Text style={globalStyles.label}>Email</Text>
                     <TextInput
                         placeholder="Digite seu email"
                         placeholderTextColor="#ccc"
@@ -53,8 +53,8 @@ export const LoginForm = () => {
                     />
                 </View>
 
-                <View style={globalStyles.container}>
-                    <Text style={globalStyles.label}>Senha</Text>
+                <View style={[globalStyles.container, authStyles.containerLogin]}>
+                <Text style={globalStyles.label}>Senha</Text>
                     <View style={authStyles.passwordContainer}>
                         <TextInput
                             placeholder="Digite sua senha"
@@ -65,7 +65,7 @@ export const LoginForm = () => {
                         />
                         <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
                             <Text style={authStyles.showPassword}>
-                                <Image source={require('../../assets/images/Show.svg')} />
+                                <Image source={require('../../assets/images/Show.png')} />
                             </Text>
                         </TouchableOpacity>
                     </View>

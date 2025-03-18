@@ -14,10 +14,10 @@ export const CategoryCard: React.FC<CardCategory>  =  ({ value, name }) => {
 
     switch (name) {
       case 'Lazer':
-        imageSource = require('../../assets/images/LazerIcone.svg');
+        imageSource = require('../../assets/images/LazerIcone.png');
         break;
-      case 'TransporteIcone':
-        imageSource = require('../../assets/images/TransporteIcone.svg');
+      case 'Transporte':
+        imageSource = require('../../assets/images/TransporteIcone.png');
         break;
       default:
         imageSource = require('../../assets/images/Ellipse.svg');

@@ -18,6 +18,9 @@ export const authStyles = StyleSheet.create({
         textAlign: 'right',
         marginTop: 10,
     },
+    containerLogin:{
+        backgroundColor: "#EBF1F6"
+    }
 });
 
 export default authStyles; 

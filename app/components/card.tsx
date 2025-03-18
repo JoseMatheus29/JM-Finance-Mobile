@@ -13,8 +13,8 @@ export const Card: React.FC<CardValues> = ({ cardName, cardNumber, expensesAmoun
     return (
         <View style={styles.carto}>
             <View style={styles.cartoChild} />
-            <Text style={[styles.carto01, styles.textTypo]}>{cardName}</Text>
-            <Text style={[styles.text, styles.textTypo]}>{cardNumber}</Text>
+            <Text style={[styles.nameCardStyle, styles.textTypo]}>{cardName}</Text>
+            <Text style={[styles.numberCardStyle, styles.textTypo]}>{cardNumber}</Text>
             <View style={styles.despesasParent}>
                 <Text style={[styles.despesas, styles.textTypo]}>Despesas</Text>
                 <Text style={[styles.r3578, styles.textTypo]}>{`R$ ${expensesAmount}`}</Text>
@@ -39,26 +39,26 @@ const styles = StyleSheet.create({
         position: "absolute",
         height: 179
     },
-    carto01: {
+    nameCardStyle: {
         lineHeight: 18,
         letterSpacing: 1,
-        fontSize: 12,
+        fontSize: 15,
         top: 24,
         color: "#fff",
-        fontFamily: "Inter-SemiBold",
-        fontWeight: "600",
+        fontFamily: "Inter",
+        fontWeight: "bold",
         position: "absolute",
         left: 21
     },
-    text: {
+    numberCardStyle: {
         left: 247,
         lineHeight: 18,
         letterSpacing: 1,
-        fontSize: 12,
+        fontSize: 15,
         top: 24,
         color: "#fff",
-        fontFamily: "Inter-SemiBold",
-        fontWeight: "600",
+        fontFamily: "Inter",
+        fontWeight: "bold",
         position: "absolute"
     },
     despesas: {
