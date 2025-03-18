@@ -1,50 +1,61 @@
-# Welcome to your Expo app 👋
+# 💰 JM-Finance (Front-end)
+🚀 Aplicativo mobile para gerenciamento financeiro pessoal, permitindo o cadastro de receitas, despesas e visualização de saldo por categorias.
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+## 📌 Tecnologias Utilizadas
+- **React Native** (Expo)
+- **Expo Router** (Navegação)
+- **TypeScript**
+- **Axios** (Requisições HTTP)
+- **React Native Vector Icons**
+- **Styled Components** (Estilização)
+- **AsyncStorage** (Persistência local)
 
-## Get started
+## 🎨 Design no Figma
+Estou desenvolvendo o design do aplicativo **JM-Finance** no **Figma**.  
+Você pode visualizar e acompanhar o protótipo pelo link abaixo:  
 
-1. Install dependencies
+🔗 [Figma - JM-Finance](https://www.figma.com/design/r33YHjHEGAaer8lXrO4k3b/JM-Finance?node-id=0-1&t=4jzZL5ecgusb36qF-1)  
 
-   ```bash
-   npm install
-   ```
+Esse design orienta o desenvolvimento do app e garante uma interface intuitiva e agradável para os usuários.  
 
-2. Start the app
+## 📌 Pré-requisitos
+Antes de rodar o projeto, certifique-se de ter instalado:
+- **Node.js 18+**
+- **Expo CLI**
+- **VS Code** (ou outro editor de código)
+- **Emulador Android/iOS** ou dispositivo físico
 
-   ```bash
-    npx expo start
-   ```
+## 📌 Configuração da API
+O aplicativo consome a API **JM-Finance API**, disponível no repositório:
+🔗 [JM-Finance API](https://github.com/JoseMatheus29/JM-Finance-API)
 
-In the output, you'll find options to open the app in a
+No arquivo `services/api.ts`, configure a URL da API:
+```ts
+import axios from 'axios';
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+const api = axios.create({
+  baseURL: 'http://localhost:8080', // 🔹 Altere se necessário
+  timeout: 10000,
+});
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
+export default api;
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## 📌 Passo a Passo para Rodar o Projeto
 
-## Learn more
+**Clonar o repositório**  
+``` git clone https://github.com/seu-usuario/jmfinance-front.git```  
+``` cd jmfinance-front```  
+**Instalar as dependências**  
+```npm install```  
+**Rodar o projeto**    
+```npx expo start```  
+**Rodar no dispositivo**  
+Android: Digitalize o QR Code no Expo Go
+iOS (Mac): Rode npx expo start --ios
+Emulador Android: Rode npx expo start --android
 
-To learn more about developing your project with Expo, look at the following resources:
+## 📌 Autor
+Desenvolvido José Matheus✌  [Veja meu Linkedin](https://www.linkedin.com/in/josé-matheus-de-lima-27706a1b6/)
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
 
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
