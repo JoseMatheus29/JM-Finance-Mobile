@@ -1,27 +1,53 @@
 import React from 'react';
 import { View, Text, ScrollView } from 'react-native';
 import CardBalance from './CardBalance';
-import CardExpenses from './CardExpenses';
 import CategoryCard from './CategoryCard';
+import Card from '../components/card';
+import SideBar from '../components/sidebar';
 
-import { dashboardStyles } from '../style/dashboardStyles';
+import { dashboardStyles } from './dashboardStyles';
 import { globalStyles } from '../style/globalStyles';
-
 
 export default function DashboardScreen() {
     return (
-        <View style={globalStyles.container}>
-            <Text style={globalStyles.title}>Dashboard</Text>
-            <ScrollView showsVerticalScrollIndicator={false}>
-                <CardBalance balance={31627.80} income={31477.50} expense={31477.50} />
-                <CardExpenses cardName="Cartão 01" lastDigits="333" expense={3578} />
-                <Text style={globalStyles.sectionTitle}>Categorias</Text>
-                <View style={dashboardStyles.categoryContainer}>
-                    <CategoryCard category="Transporte" amount={1800} />
-                    <CategoryCard category="Lazer" amount={1800} />
+        <View style={{ flex: 1 }}>
+
+            <View style={globalStyles.pageConfig}>
+                <Text style={globalStyles.sectionTitle}>Dashboard</Text>
+                <View style={globalStyles.formContainer}>
+
+
+
+                    <View style={globalStyles.container}>
+                    <Text style={globalStyles.groupTitle}>Resumo</Text>
+                        <CardBalance
+                            valueTot={31.627}
+                            valueEnt={10.512}
+                            valueSai={3.123}
+                        />
+                    </View>
+
+                    <View style={globalStyles.container}>
+                        <Text style={globalStyles.groupTitle}>Cartões</Text>
+                        <Card
+                            cardName="Cartão 01"
+                            cardNumber="****333"
+                            expensesAmount={3.578} />
+                    </View>
+
+                    <View style={globalStyles.container}>
+                        <Text style={globalStyles.groupTitle }>Categorias</Text>
+                        <View style={dashboardStyles.categoryContainer}>
+                            <CategoryCard name="Transporte" value={1800} />
+                            <CategoryCard name="Lazer" value={1800} />
+                        </View>
+
+                    </View>
                 </View>
-            </ScrollView>
+
+            </View>
+            <SideBar />
+
         </View>
     );
 };
-
