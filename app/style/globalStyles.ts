@@ -7,6 +7,8 @@ export const globalStyles = StyleSheet.create({
         padding: 15,
         width: "100%",
         display: 'flex',
+        justifyContent: 'space-between',  // Distribui os itens com o maior espaço possível entre eles
+
     },
 
     formContainer: {
