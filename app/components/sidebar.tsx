@@ -1,34 +1,47 @@
 import React from 'react';
-import { View, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { Link } from 'expo-router';
 
 export const SideBar = () => {
   return (
-
     <View style={styles.bottomNav}>
-      <TouchableOpacity style={styles.navItem}>
-        <Icon name="home" size={24} color="#A0A0A0" />
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.navItem}>
-        <Icon name="calendar-today" size={24} color="#A0A0A0" />
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.navItem}>
-        <View style={styles.addButton}>
-          <Icon name="add" size={32} color="#FFF" />
+      <Link href="/dashboard" asChild style={styles.navItem}>
+        <View>
+          <Icon name="home" size={24} color="#A0A0A0" />
         </View>
-      </TouchableOpacity>
-      <TouchableOpacity style={[styles.navItem, styles.activeNav]}>
-        <Icon name="account-balance-wallet" size={24} color="#3161B2" />
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.navItem}>
-        <Icon name="person" size={24} color="#A0A0A0" />
-      </TouchableOpacity>
+      </Link>
+
+      <Link href="/myDetailing" asChild style={styles.navItem}>
+        <View>
+          <Icon name="calendar-today" size={24} color="#A0A0A0" />
+        </View>
+      </Link>
+
+      <Link href="/registrationSpent" asChild>
+        <View style={styles.navItem}>
+          <View style={styles.addButton}>
+            <Icon name="add" size={32} color="#FFF" />
+          </View>
+        </View>
+      </Link>
+
+      <Link href="/wallet" asChild style={[styles.navItem, styles.activeNav]}>
+        <View>
+          <Icon name="account-balance-wallet" size={24} color="#3161B2" />
+        </View>
+      </Link>
+
+      <Link href="/editAcount" asChild style={styles.navItem}>
+        <View>
+          <Icon name="person" size={24} color="#A0A0A0" />
+        </View>
+      </Link>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-
   bottomNav: {
     flexDirection: 'row',
     justifyContent: 'space-around',
@@ -62,7 +75,6 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 3 },
     elevation: 5,
   },
-
 });
 
 export default SideBar;
