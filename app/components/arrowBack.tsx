@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import { useNavigation } from '@react-navigation/native';
 
 
-const ArrowBack = () => {
+export const ArrowBack = () => {
     const navigation = useNavigation();
 
     const handleVoltar = () => {
@@ -28,4 +28,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default ArrowBack;
+
