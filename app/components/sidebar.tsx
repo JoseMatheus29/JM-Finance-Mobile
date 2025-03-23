@@ -1,29 +1,27 @@
 import React from 'react';
-import { View, TouchableOpacity, Image, StyleSheet } from 'react-native';
+import { View, TouchableOpacity, StyleSheet } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 export const SideBar = () => {
   return (
 
-    <View style={styles.navContainer}>
-      <TouchableOpacity style={styles.iconWrapper}>
-        <Image source={require('../../assets/images/Home.png')} />
+    <View style={styles.bottomNav}>
+      <TouchableOpacity style={styles.navItem}>
+        <Icon name="home" size={24} color="#A0A0A0" />
       </TouchableOpacity>
-
-      <TouchableOpacity style={styles.iconWrapper}>
-        <Image source={require('../../assets/images/Calendario.png')} />
+      <TouchableOpacity style={styles.navItem}>
+        <Icon name="calendar-today" size={24} color="#A0A0A0" />
       </TouchableOpacity>
-
-      {/* Botão central "Create" */}
-      <TouchableOpacity style={styles.addButton}>
-        <Image source={require('../../assets/images/Create.png')} />
+      <TouchableOpacity style={styles.navItem}>
+        <View style={styles.addButton}>
+          <Icon name="add" size={32} color="#FFF" />
+        </View>
       </TouchableOpacity>
-
-      <TouchableOpacity style={styles.iconWrapper}>
-        <Image source={require('../../assets/images/wallet.png')} />
+      <TouchableOpacity style={[styles.navItem, styles.activeNav]}>
+        <Icon name="account-balance-wallet" size={24} color="#3161B2" />
       </TouchableOpacity>
-
-      <TouchableOpacity style={styles.iconWrapper}>
-        <Image source={require('../../assets/images/user.png')} />
+      <TouchableOpacity style={styles.navItem}>
+        <Icon name="person" size={24} color="#A0A0A0" />
       </TouchableOpacity>
     </View>
   );
@@ -31,24 +29,38 @@ export const SideBar = () => {
 
 const styles = StyleSheet.create({
 
-  navContainer: {
+  bottomNav: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingHorizontal: 40,
-    backgroundColor: "#EBF1F6"
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    backgroundColor: '#FFF',
+    paddingVertical: 12,
+    borderTopWidth: 1,
+    borderTopColor: '#E0E0E0',
   },
-  iconWrapper: {
+  navItem: {
     alignItems: 'center',
     justifyContent: 'center',
+    flex: 1,
   },
-
+  activeNav: {
+    borderTopWidth: 2,
+    borderTopColor: '#3161B2',
+    paddingTop: 10,
+  },
   addButton: {
-    width: 60,
-    height: 60,
-    borderRadius: 30,
-    justifyContent: 'center',
+    backgroundColor: '#3161B2',
+    width: 56,
+    height: 56,
+    borderRadius: 28,
     alignItems: 'center',
-    marginBottom: 10,
+    justifyContent: 'center',
+    marginTop: -28,
+    shadowColor: '#000',
+    shadowOpacity: 0.2,
+    shadowRadius: 5,
+    shadowOffset: { width: 0, height: 3 },
+    elevation: 5,
   },
 
 });
