@@ -1,18 +1,30 @@
 import * as React from "react";
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, Text, ViewStyle } from "react-native";
 
 
 interface CardValues {
     cardName: string;
     cardNumber: string;
     expensesAmount: number;
+    backgroundColor?: string;
+    style?: ViewStyle;
+    isSelected?: boolean;
 }
 
-
-export const Card: React.FC<CardValues> = ({ cardName, cardNumber, expensesAmount }) => {
+export const Card: React.FC<CardValues> = ({ cardName,
+    cardNumber,
+    expensesAmount,
+    backgroundColor,
+    style,
+    isSelected
+}) => {
     return (
-        <View style={styles.carto}>
-            <View style={styles.cartoChild} />
+        <View style={[
+            styles.carto,
+            style,
+            isSelected && styles.selectedCard
+        ]}>
+            <View style={[styles.cartoChild, { backgroundColor: backgroundColor }]} />
             <Text style={[styles.nameCardStyle, styles.textTypo]}>{cardName}</Text>
             <Text style={[styles.numberCardStyle, styles.textTypo]}>{cardNumber}</Text>
             <View style={styles.despesasParent}>
@@ -24,6 +36,9 @@ export const Card: React.FC<CardValues> = ({ cardName, cardNumber, expensesAmoun
 };
 
 const styles = StyleSheet.create({
+    selectedCard: {
+        transform: [{ scale: 1.02 }],
+    },
     textTypo: {
         textAlign: "left",
         color: "#fff",
