@@ -6,8 +6,8 @@ interface CardValues {
     cardName: string;
     cardNumber: string;
     expensesAmount: number;
-}
-
+    backgroundColor?: string; 
+  }
 
 export const Card: React.FC<CardValues> = ({ cardName, cardNumber, expensesAmount }) => {
     return (
