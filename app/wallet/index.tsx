@@ -60,63 +60,65 @@ export default function wallet() {
     const orderedCards = getOrderedCards();
 
     return (
+        <View style={{ flex: 1 }}>
 
 
-        <View style={globalStyles.pageConfig}>
+            <View style={globalStyles.pageConfig}>
 
-            <View style={{ flexDirection: "row", paddingStart: 15, marginBottom: 20, justifyContent: "space-between" }}>
-                <ArrowBack />
-                <Text style={globalStyles.sectionTitle}>Carteira</Text>
-                <Text ></Text>
+                <View style={{ flexDirection: "row", paddingStart: 15, marginBottom: 20, justifyContent: "space-between" }}>
+                    <ArrowBack />
+                    <Text style={globalStyles.sectionTitle}>Carteira</Text>
+                    <Text ></Text>
 
-            </View>
+                </View>
 
-            <View style={styles.cardsContainer}>
-                {orderedCards.map((card, index) => (
-                    <TouchableOpacity
-                        key={card.id}
-                        onPress={() => handleCardSelect(card.id)}
-                        activeOpacity={0.9}
-                        style={styles.cardWrapper}
-                    >
-                        <Card
-                            cardName={card.name}
-                            cardNumber={card.number}
-                            expensesAmount={3578}
-                            backgroundColor={card.color}
-                            style={{
-                                position: 'absolute',
-                                top: index * 70,
-                                width: '100%',
-                                zIndex: orderedCards.length - index,
-                                transform: [
-                                    {
-                                        scale: card.id === selectedCardId ? 1 : 0.98
-                                    }
-                                ]
-                            }}
-                        />
-                    </TouchableOpacity>
-                ))}
-            </View>
+                <View style={styles.cardsContainer}>
+                    {orderedCards.map((card, index) => (
+                        <TouchableOpacity
+                            key={card.id}
+                            onPress={() => handleCardSelect(card.id)}
+                            activeOpacity={0.9}
+                            style={styles.cardWrapper}
+                        >
+                            <Card
+                                cardName={card.name}
+                                cardNumber={card.number}
+                                expensesAmount={3578}
+                                backgroundColor={card.color}
+                                style={{
+                                    position: 'absolute',
+                                    top: index * 70,
+                                    width: '100%',
+                                    zIndex: orderedCards.length - index,
+                                    transform: [
+                                        {
+                                            scale: card.id === selectedCardId ? 1 : 0.98
+                                        }
+                                    ]
+                                }}
+                            />
+                        </TouchableOpacity>
+                    ))}
+                </View>
 
-            <View style={styles.containerTransition}>
-                <Text style={styles.sectionTitle}>Transações</Text>
-                <FlatList
-                    data={transactions}
-                    keyExtractor={(item) => item.id.toString()}
-                    renderItem={({ item }) => (
-                        <View style={styles.transactionItem}>
-                            <View>
-                                <Text style={globalStyles.sectionTitle}>{item.name}</Text>
-                                <Text style={styles.transactionDate}>{item.date}</Text>
+                <View style={styles.containerTransition}>
+                    <Text style={styles.sectionTitle}>Transações</Text>
+                    <FlatList
+                        data={transactions}
+                        keyExtractor={(item) => item.id.toString()}
+                        renderItem={({ item }) => (
+                            <View style={styles.transactionItem}>
+                                <View>
+                                    <Text style={globalStyles.label}>{item.name}</Text>
+                                    <Text style={styles.transactionDate}>{item.date}</Text>
+                                </View>
+                                <Text style={[styles.transactionAmount, item.amount < 0 ? styles.negative : styles.positive]}>
+                                    {item.amount < 0 ? `- R$${Math.abs(item.amount)}` : `+ R$${item.amount}`}
+                                </Text>
                             </View>
-                            <Text style={[styles.transactionAmount, item.amount < 0 ? styles.negative : styles.positive]}>
-                                {item.amount < 0 ? `- R$${Math.abs(item.amount)}` : `+ R$${item.amount}`}
-                            </Text>
-                        </View>
-                    )}
-                />
+                        )}
+                    />
+                </View>
             </View>
             <SideBar />
         </View>

@@ -1,20 +1,26 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { Link } from 'expo-router';
+import { Link, usePathname } from 'expo-router';
 
 export const SideBar = () => {
+  const pathname = usePathname();
+
+  const isActiveRoute = (route: string) => {
+    return pathname.startsWith(route);
+  };
+
   return (
     <View style={styles.bottomNav}>
-      <Link href="/dashboard" asChild style={styles.navItem}>
+      <Link href="/dashboard" asChild style={[styles.navItem, isActiveRoute('/dashboard') && styles.activeNav]}>
         <View>
-          <Icon name="home" size={24} color="#A0A0A0" />
+          <Icon name="home" size={24} color={isActiveRoute('/dashboard') ? "#3161B2" : "#A0A0A0"} />
         </View>
       </Link>
 
-      <Link href="/myDetailing" asChild style={styles.navItem}>
+      <Link href="/myDetailing" asChild style={[styles.navItem, isActiveRoute('/myDetailing') && styles.activeNav]}>
         <View>
-          <Icon name="calendar-today" size={24} color="#A0A0A0" />
+          <Icon name="calendar-today" size={24} color={isActiveRoute('/myDetailing') ? "#3161B2" : "#A0A0A0"} />
         </View>
       </Link>
 
@@ -26,15 +32,15 @@ export const SideBar = () => {
         </View>
       </Link>
 
-      <Link href="/wallet" asChild style={[styles.navItem, styles.activeNav]}>
+      <Link href="/wallet" asChild style={[styles.navItem, isActiveRoute('/wallet') && styles.activeNav]}>
         <View>
-          <Icon name="account-balance-wallet" size={24} color="#3161B2" />
+          <Icon name="account-balance-wallet" size={24} color={isActiveRoute('/wallet') ? "#3161B2" : "#A0A0A0"} />
         </View>
       </Link>
 
-      <Link href="/editAcount" asChild style={styles.navItem}>
+      <Link href="/editAcount" asChild style={[styles.navItem, isActiveRoute('/editAcount') && styles.activeNav]}>
         <View>
-          <Icon name="person" size={24} color="#A0A0A0" />
+          <Icon name="person" size={24} color={isActiveRoute('/editAcount') ? "#3161B2" : "#A0A0A0"} />
         </View>
       </Link>
     </View>
