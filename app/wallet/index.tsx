@@ -18,14 +18,7 @@ import CardHorizontal from '../components/cardHorizontal';
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 const CARD_WIDTH = SCREEN_WIDTH - 48;
 
-interface CardType {
-  id: number;
-  name: string;
-  number: string;
-  color: string;
-  lightColor: string;
-  balance: number;
-}
+import { CardType } from './wallet-type';
 
 const CARDS: CardType[] = [
   { id: 1, name: 'Cartão Principal', number: '333', color: '#3161B2', lightColor: '#4A74BB', balance: 3578 },

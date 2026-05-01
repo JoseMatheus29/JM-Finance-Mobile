@@ -16,16 +16,7 @@ import { useRouter } from 'expo-router';
 
 import SideBar from '../components/sidebar';
 
-// ── Tipos ─────────────────────────────────────────────────────
-type TxType = 'expense' | 'income';
-
-interface Category {
-  id: string;
-  name: string;
-  icon: string;
-  color: string;
-  bg: string;
-}
+import { TxType, Category } from './registrationSpent-type';
 
 // ── Constantes ────────────────────────────────────────────────
 const CATEGORIES: Category[] = [

@@ -2,11 +2,7 @@ import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-interface CardCategory {
-  value: number;
-  total: number;
-  name: string;
-}
+import { CardCategory } from './categoryCard-type';
 
 const CATEGORY_CONFIG: Record<string, { icon: string; color: string; bg: string }> = {
   Lazer: { icon: 'sports-esports', color: '#7998CD', bg: 'rgba(121,152,205,0.12)' },

@@ -3,11 +3,7 @@ import { View, Text } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-interface BalanceCard {
-  valueTot: number;
-  valueEnt: number;
-  valueSai: number;
-}
+import { BalanceCard } from './cardBalance-type';
 
 const formatCurrency = (value: number) =>
   value.toLocaleString('pt-BR', { minimumFractionDigits: 2 });

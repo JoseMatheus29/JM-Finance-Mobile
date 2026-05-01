@@ -2,13 +2,7 @@ import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-interface CardHorizontalProps {
-  name?: string;
-  date?: string;
-  amount?: number;
-  category?: string;
-  type?: 'income' | 'expense';
-}
+import { CardHorizontalProps } from './cardHorizontal-type';
 
 const CATEGORY_ICONS: Record<string, string> = {
   Lazer: 'sports-esports',

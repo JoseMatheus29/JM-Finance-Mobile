@@ -3,14 +3,7 @@ import { View, Text, ViewStyle } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-interface CardValues {
-  cardName: string;
-  cardNumber: string;
-  expensesAmount: number;
-  backgroundColor?: string;
-  style?: ViewStyle;
-  isSelected?: boolean;
-}
+import { CardValues } from './card-type';
 
 const formatCurrency = (value: number) =>
   value.toLocaleString('pt-BR', { minimumFractionDigits: 2 });

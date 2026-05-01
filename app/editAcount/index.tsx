@@ -17,16 +17,7 @@ import ArrowBack from '../components/arrowBack';
 import SideBar from '../components/sidebar';
 
 // ── Campo de Input reutilizável ──────────────────────────────
-interface FieldProps {
-  label: string;
-  placeholder: string;
-  value: string;
-  onChangeText: (v: string) => void;
-  icon: string;
-  keyboardType?: any;
-  secure?: boolean;
-  autoCapitalize?: any;
-}
+import { FieldProps } from './editAcount-type';
 
 const Field: React.FC<FieldProps> = ({
   label, placeholder, value, onChangeText,
