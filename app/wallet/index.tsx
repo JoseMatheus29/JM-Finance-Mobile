@@ -1,188 +1,185 @@
-import React, { useState } from 'react';
-import { View, Text, FlatList, TouchableOpacity, StyleSheet, ViewStyle } from 'react-native';
-import globalStyles from '../style/globalStyles';
-import { walletStyle } from '../styles/walletStyle';
+import React, { useState, useRef } from 'react';
+import {
+  View,
+  Text,
+  FlatList,
+  TouchableOpacity,
+  Animated,
+  Dimensions,
+  ScrollView,
+} from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+
 import { Card } from '../components/card';
 import ArrowBack from '../components/arrowBack';
 import SideBar from '../components/sidebar';
+import CardHorizontal from '../components/cardHorizontal';
+
+const { width: SCREEN_WIDTH } = Dimensions.get('window');
+const CARD_WIDTH = SCREEN_WIDTH - 48;
 
 interface CardType {
-    id: number;
-    name: string;
-    number: string;
-    color: string;
+  id: number;
+  name: string;
+  number: string;
+  color: string;
+  lightColor: string;
+  balance: number;
 }
-const initialCards: CardType[] = [
-    {
-        id: 1,
-        name: 'Cartão 01',
-        number: '****333',
-        color: '#7998CD'
-    },
-    {
-        id: 2,
-        name: 'Cartão 02',
-        number: '****333',
-        color: '#4A74BB'
-    },
 
-    {
-        id: 3,
-        name: 'Cartão 03',
-        number: '****333',
-        color: '#3161B2'
-    }
+const CARDS: CardType[] = [
+  { id: 1, name: 'Cartão Principal', number: '333', color: '#3161B2', lightColor: '#4A74BB', balance: 3578 },
+  { id: 2, name: 'Cartão Secundário', number: '771', color: '#254E8F', lightColor: '#3161B2', balance: 1250 },
+  { id: 3, name: 'Cartão Virtual', number: '982', color: '#4A74BB', lightColor: '#7998CD', balance: 890.50 },
 ];
 
-const transactions = [
-    { id: 1, name: 'Shopping', date: '10 jan 2022', amount: -200.80 },
-    { id: 2, name: 'Mercado', date: '10 jan 2022', amount: 100.80 },
-    { id: 3, name: 'Carro', date: '10 jan 2022', amount: 417.80 },
+const TRANSACTIONS = [
+  { id: 1, name: 'Shopping', date: '10 jan 2022', amount: -200.80, category: 'Lazer', type: 'expense' as const },
+  { id: 2, name: 'Mercado', date: '12 jan 2022', amount: 100.80, category: 'Alimentação', type: 'income' as const },
+  { id: 3, name: 'Carro', date: '15 jan 2022', amount: -417.80, category: 'Transporte', type: 'expense' as const },
 ];
 
-export default function wallet() {
-    const [selectedCardId, setSelectedCardId] = useState<number | null>(3);
+export default function WalletScreen() {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const flatListRef = useRef<FlatList>(null);
 
-    const getOrderedCards = (): CardType[] => {
-        if (!selectedCardId) return initialCards;
+  const activeCard = CARDS[activeIndex];
 
-        const selectedCard = initialCards.find(card => card.id === selectedCardId);
-        if (!selectedCard) return initialCards;
+  const handleCardChange = (event: any) => {
+    const index = Math.round(event.nativeEvent.contentOffset.x / CARD_WIDTH);
+    setActiveIndex(index);
+  };
 
-        const otherCards = initialCards.filter(card => card.id !== selectedCardId);
-        return [...otherCards, selectedCard];
-    };
+  return (
+    <View style={{ flex: 1, backgroundColor: '#F7F9FC' }}>
 
-    const handleCardSelect = (cardId: number) => {
-        setSelectedCardId(cardId === selectedCardId ? null : cardId);
-    };
-
-    const orderedCards = getOrderedCards();
-
-    return (
-        <View style={{ flex: 1 }}>
-
-
-            <View style={globalStyles.pageConfig}>
-
-                <View style={{ flexDirection: "row", paddingStart: 15, marginBottom: 20, justifyContent: "space-between" }}>
-                    <ArrowBack />
-                    <Text style={globalStyles.sectionTitle}>Carteira</Text>
-                    <Text ></Text>
-
-                </View>
-
-                <View style={styles.cardsContainer}>
-                    {orderedCards.map((card, index) => (
-                        <TouchableOpacity
-                            key={card.id}
-                            onPress={() => handleCardSelect(card.id)}
-                            activeOpacity={0.9}
-                            style={styles.cardWrapper}
-                        >
-                            <Card
-                                cardName={card.name}
-                                cardNumber={card.number}
-                                expensesAmount={3578}
-                                backgroundColor={card.color}
-                                style={{
-                                    position: 'absolute',
-                                    top: index * 70,
-                                    width: '100%',
-                                    zIndex: orderedCards.length - index,
-                                    transform: [
-                                        {
-                                            scale: card.id === selectedCardId ? 1 : 0.98
-                                        }
-                                    ]
-                                }}
-                            />
-                        </TouchableOpacity>
-                    ))}
-                </View>
-
-                <View style={styles.containerTransition}>
-                    <Text style={styles.sectionTitle}>Transações</Text>
-                    <FlatList
-                        data={transactions}
-                        keyExtractor={(item) => item.id.toString()}
-                        renderItem={({ item }) => (
-                            <View style={styles.transactionItem}>
-                                <View>
-                                    <Text style={globalStyles.label}>{item.name}</Text>
-                                    <Text style={styles.transactionDate}>{item.date}</Text>
-                                </View>
-                                <Text style={[styles.transactionAmount, item.amount < 0 ? styles.negative : styles.positive]}>
-                                    {item.amount < 0 ? `- R$${Math.abs(item.amount)}` : `+ R$${item.amount}`}
-                                </Text>
-                            </View>
-                        )}
-                    />
-                </View>
-            </View>
-            <SideBar />
+      {/* Header */}
+      <LinearGradient
+        colors={['#254E8F', '#3161B2', '#4A74BB']}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 1 }}
+        style={{ paddingTop: 52, paddingBottom: 28, paddingHorizontal: 20 }}
+      >
+        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+          <View style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }}>
+            <ArrowBack />
+            <Text style={{ color: '#fff', fontSize: 20, fontWeight: '700' }}>Carteira</Text>
+          </View>
+          <TouchableOpacity
+            style={{
+              width: 36, height: 36, borderRadius: 12,
+              backgroundColor: 'rgba(255,255,255,0.2)',
+              alignItems: 'center', justifyContent: 'center',
+            }}
+          >
+            <Icon name="add" size={20} color="#fff" />
+          </TouchableOpacity>
         </View>
-    );
+      </LinearGradient>
+
+      <ScrollView
+        style={{ flex: 1, marginTop: -16 }}
+        contentContainerStyle={{ paddingBottom: 24 }}
+        showsVerticalScrollIndicator={false}
+      >
+        {/* Carrossel de Cards */}
+        <View style={{ marginBottom: 12 }}>
+          <FlatList
+            ref={flatListRef}
+            data={CARDS}
+            horizontal
+            pagingEnabled
+            showsHorizontalScrollIndicator={false}
+            snapToInterval={CARD_WIDTH}
+            decelerationRate="fast"
+            contentContainerStyle={{ paddingHorizontal: 24 }}
+            ItemSeparatorComponent={() => <View style={{ width: 0 }} />}
+            onMomentumScrollEnd={handleCardChange}
+            keyExtractor={(item) => item.id.toString()}
+            renderItem={({ item }) => (
+              <View style={{ width: CARD_WIDTH, paddingRight: 0 }}>
+                <Card
+                  cardName={item.name}
+                  cardNumber={`****${item.number}`}
+                  expensesAmount={item.balance}
+                  backgroundColor={item.color}
+                />
+              </View>
+            )}
+          />
+
+          {/* Dots indicadores */}
+          <View style={{ flexDirection: 'row', justifyContent: 'center', gap: 6, marginTop: 14 }}>
+            {CARDS.map((_, i) => (
+              <TouchableOpacity
+                key={i}
+                onPress={() => {
+                  flatListRef.current?.scrollToIndex({ index: i, animated: true });
+                  setActiveIndex(i);
+                }}
+                style={{
+                  width: i === activeIndex ? 20 : 6,
+                  height: 6,
+                  borderRadius: 3,
+                  backgroundColor: i === activeIndex ? '#3161B2' : '#CBD5E0',
+                }}
+              />
+            ))}
+          </View>
+        </View>
+
+        {/* Resumo do card ativo */}
+        <View
+          style={{
+            marginHorizontal: 16,
+            backgroundColor: '#fff',
+            borderRadius: 20,
+            padding: 16,
+            marginBottom: 20,
+            flexDirection: 'row',
+            justifyContent: 'space-around',
+            borderWidth: 1,
+            borderColor: '#EBF1F6',
+          }}
+        >
+          {[
+            { label: 'Receitas', value: 'R$ 1.250', icon: 'arrow-downward', color: '#36A83A', bg: 'rgba(54,168,58,0.1)' },
+            { label: 'Despesas', value: 'R$ 618', icon: 'arrow-upward', color: '#A83636', bg: 'rgba(168,54,54,0.1)' },
+            { label: 'Saldo', value: `R$ ${activeCard.balance.toLocaleString('pt-BR', { minimumFractionDigits: 0 })}`, icon: 'account-balance', color: '#3161B2', bg: 'rgba(49,97,178,0.1)' },
+          ].map((stat, i) => (
+            <View key={i} style={{ alignItems: 'center' }}>
+              <View style={{ width: 36, height: 36, borderRadius: 12, backgroundColor: stat.bg, alignItems: 'center', justifyContent: 'center', marginBottom: 6 }}>
+                <Icon name={stat.icon} size={16} color={stat.color} />
+              </View>
+              <Text style={{ fontSize: 13, fontWeight: '700', color: '#1A2B4A' }}>{stat.value}</Text>
+              <Text style={{ fontSize: 10, color: '#A0AEC0', marginTop: 1 }}>{stat.label}</Text>
+            </View>
+          ))}
+        </View>
+
+        {/* Transações */}
+        <View style={{ paddingHorizontal: 16 }}>
+          <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
+            <Text style={{ fontSize: 16, fontWeight: '700', color: '#1A2B4A' }}>Transações</Text>
+            <TouchableOpacity>
+              <Text style={{ fontSize: 13, color: '#3161B2', fontWeight: '600' }}>Filtrar</Text>
+            </TouchableOpacity>
+          </View>
+          {TRANSACTIONS.map((t) => (
+            <CardHorizontal
+              key={t.id}
+              name={t.name}
+              date={t.date}
+              amount={t.amount}
+              category={t.category}
+              type={t.type}
+            />
+          ))}
+        </View>
+      </ScrollView>
+
+      <SideBar />
+    </View>
+  );
 }
-
-
-const styles = StyleSheet.create({
-    cardsContainer: {
-        position: 'relative',
-        height: 350,
-        marginBottom: 20,
-        paddingTop: 50,
-        paddingBottom: 50,
-    } as ViewStyle,
-
-    cardWrapper: {
-        position: 'absolute',
-        width: '100%',
-    } as ViewStyle,
-
-
-    containerTransition: {
-        marginBottom: 20,
-        paddingTop: 50,
-        width: '100%',
-    },
-
-    transactionItem: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        paddingVertical: 12,
-        borderBottomWidth: 1,
-        borderBottomColor: '#E0E0E0',
-    },
-    transactionName: {
-        fontSize: 16,
-        fontWeight: 'bold',
-        color: '#3161B2',
-    },
-    transactionDate: {
-        fontSize: 12,
-        color: '#A0A0A0',
-        marginTop: 4,
-    },
-    transactionAmount: {
-        fontSize: 16,
-        fontWeight: 'bold',
-    },
-    positive: {
-        color: '#36A83A',
-    },
-    negative: {
-        color: '#A83636',
-    },
-    sectionTitle: {
-        fontFamily: "Inter",
-        fontSize: 16,
-        lineHeight: 20,
-        fontWeight: "bold",
-        color: "#3161b2",
-        textAlign: "left",
-        marginBottom: 10,
-    },
-
-});

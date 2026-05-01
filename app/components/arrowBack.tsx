@@ -1,31 +1,27 @@
-import * as React from "react";
-import {  StyleSheet, TouchableOpacity } from "react-native";
+import React from 'react';
+import { TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-
-import { useNavigation } from '@react-navigation/native';
-
+import { useRouter } from 'expo-router';
 
 const ArrowBack = () => {
-    const navigation = useNavigation();
+  const router = useRouter();
 
-    const handleVoltar = () => {
-        navigation.goBack();
-    };
-    return (
-        <TouchableOpacity>
-            <Icon name="arrow-back" size={24} color="#3161B2" />
-        </TouchableOpacity>
-
-    );
+  return (
+    <TouchableOpacity
+      onPress={() => router.back()}
+      activeOpacity={0.7}
+      style={{
+        width: 36,
+        height: 36,
+        borderRadius: 12,
+        backgroundColor: '#EBF1F6',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
+      <Icon name="arrow-back" size={20} color="#3161B2" />
+    </TouchableOpacity>
+  );
 };
-
-
-const styles = StyleSheet.create({
-    arrowBackIcon: {
-        width: 14,
-        height: 19,
-
-    }
-});
 
 export default ArrowBack;

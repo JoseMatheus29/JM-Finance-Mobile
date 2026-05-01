@@ -1,152 +1,74 @@
-import * as React from "react";
-import { StyleSheet, View, Text } from "react-native";
+import React from 'react';
+import { View, Text } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 interface BalanceCard {
-    valueTot: number;
-    valueEnt: number;
-    valueSai: number;
-
+  valueTot: number;
+  valueEnt: number;
+  valueSai: number;
 }
 
+const formatCurrency = (value: number) =>
+  value.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+
 export const CardBalance: React.FC<BalanceCard> = ({ valueTot, valueEnt, valueSai }) => {
-
-    return (
-        <View style={styles.rectangleParent}>
-
-            
-            <View style={styles.groupParent}>
-                <View style={[styles.subtitle]}>
-                    <Text style={[styles.entradas, styles.typo]}>{`R$ `}{valueEnt}</Text>
-                    <Text style={[styles.totalDeEntradas, styles.labelSubtitle]}>{`Total de entradas `}</Text>
-                </View>
-                <View style={[styles.posSubtitleLabel, styles.subtitle]}>
-                    <Text style={[styles.saidas, styles.typo]}>{`R$ `}{valueSai}</Text>
-                    <Text style={[styles.totalDeEntradas, styles.labelSubtitle]}>Total de saidas</Text>
-                </View>
-            </View>
-            <View style={[styles.groupWrapper, styles.groupWrapperLayout]}>
-                <View style={[styles.groupWrapperLayout]}>
-                <Text style={[styles.totalSaidas, styles.labelSubtitle]}>{`R$ `}{valueTot}</Text>
-                    <View style={styles.arrow} />
-                </View>
-            </View>
-            <Text style={[styles.saldoMensal, styles.labelSubtitle]}>{`Saldo Mensal `}</Text>
-            <View style={styles.groupItem} />
-        </View>);
-};
-
-const styles = StyleSheet.create({
-
-    cartoChild: {
-        top: 0,
-        left: 0,
+  return (
+    <LinearGradient
+      colors={['rgba(49,97,178,0.08)', '#EBF1F6']}
+      style={{
         borderRadius: 24,
-        backgroundColor: "rgba(49, 97, 178, 0.85)",
-        width: "100%",
-        position: "absolute",
-        height: 179
-    },
+        padding: 24,
+        borderWidth: 1,
+        borderColor: '#D4E1EF',
+      }}
+    >
+      {/* Saldo principal */}
+      <View style={{ marginBottom: 20 }}>
+        <Text style={{ fontSize: 12, color: '#7998CD', fontWeight: '600', letterSpacing: 0.8, textTransform: 'uppercase', marginBottom: 4 }}>
+          Saldo Mensal
+        </Text>
+        <Text style={{ fontSize: 32, fontWeight: '800', color: '#1A2B4A', letterSpacing: -0.5 }}>
+          R$ {formatCurrency(valueTot)}
+        </Text>
+      </View>
 
-    subtitle: {
-        width: 123,
-        height: 54,
-        top: 0,
-        position: "absolute"
-    },
-    typo: {
-        textAlign: "left",
-        fontFamily: "inter",
-        lineHeight: 32,
-        letterSpacing: 1,
-        fontSize: 20,
-        top: 22,
-        fontWeight: "bold",
-        left: 0,
-        position: "absolute"
-    },
-    labelSubtitle: {
-        color: "#3161b2",
-        textAlign: "left",
-        letterSpacing: 1,
-        position: "absolute"
-    },
-    groupWrapperLayout: {
-        height: 34,
-        width: 219,
-        position: "absolute"
-    },
+      {/* Divisor */}
+      <View style={{ height: 1, backgroundColor: '#D4E1EF', marginBottom: 16 }} />
 
-    entradas: {
-        color: "#36a83a"
-    },
-    totalDeEntradas: {
-        fontFamily: "Inter",
-        lineHeight: 18,
-        fontSize: 12,
-        color: "#3161b2",
-        fontWeight: "bold",
-        left: 0,
-        top: 0
-    },
+      {/* Entradas e Saídas */}
+      <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+        {/* Entradas */}
+        <View style={{ flex: 1 }}>
+          <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6, marginBottom: 4 }}>
+            <View style={{ width: 28, height: 28, borderRadius: 14, backgroundColor: 'rgba(54,168,58,0.12)', alignItems: 'center', justifyContent: 'center' }}>
+              <Icon name="arrow-downward" size={14} color="#36A83A" />
+            </View>
+            <Text style={{ fontSize: 12, color: '#718096', fontWeight: '500' }}>Entradas</Text>
+          </View>
+          <Text style={{ fontSize: 18, fontWeight: '700', color: '#36A83A' }}>
+            R$ {formatCurrency(valueEnt)}
+          </Text>
+        </View>
 
-    saidas: {
-        color: "#a83636"
-    },
-    posSubtitleLabel: {
-        left: 168
-    },
-    groupParent: {
-        top: 121,
-        width: 291,
-        height: 54,
-        left: 12,
-        position: "absolute"
-    },
-    totalSaidas: {
-        fontSize: 32,
-        lineHeight: 34,
-        fontWeight: "700",
-        fontFamily: "DMSans-Bold",
-        left: 0,
-        top: 0
-    },
-    arrow: {
-        top: 5,
-        left: 195,
-        width: 24,
-        height: 24,
-        overflow: "hidden",
-        position: "absolute"
-    },
+        {/* Separador vertical */}
+        <View style={{ width: 1, backgroundColor: '#D4E1EF', marginHorizontal: 16 }} />
 
-    groupWrapper: {
-        top: 54,
-        left: 12
-    },
-    saldoMensal: {
-        top: 24,
-        fontFamily: "Inter",
-        fontWeight: "bold",
-
-        lineHeight: 18,
-        fontSize: 12,
-        color: "#3161b2",
-        left: 12
-    },
-    groupItem: {
-        top: 104,
-        backgroundColor: "#d9dbe9",
-        width: 317,
-        height: 1,
-        left: 12,
-        position: "absolute"
-    },
-    rectangleParent: {
-        width: "100%",
-        height: 191,
-        borderRadius: 5,
-        backgroundColor: "#EBF1F6"
-    }
-});
+        {/* Saídas */}
+        <View style={{ flex: 1 }}>
+          <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6, marginBottom: 4 }}>
+            <View style={{ width: 28, height: 28, borderRadius: 14, backgroundColor: 'rgba(168,54,54,0.12)', alignItems: 'center', justifyContent: 'center' }}>
+              <Icon name="arrow-upward" size={14} color="#A83636" />
+            </View>
+            <Text style={{ fontSize: 12, color: '#718096', fontWeight: '500' }}>Saídas</Text>
+          </View>
+          <Text style={{ fontSize: 18, fontWeight: '700', color: '#A83636' }}>
+            R$ {formatCurrency(valueSai)}
+          </Text>
+        </View>
+      </View>
+    </LinearGradient>
+  );
+};
 
 export default CardBalance;
