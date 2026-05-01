@@ -3,9 +3,9 @@ import { View, Text } from 'react-native';
 import ArrowBack from '../components/arrowBack';
 import { globalStyles } from '../style/globalStyles';
 
-import { myDetailingStyle } from './myDetailing'
+import { myDetailingStyle } from '../styles/myDetailingStyles'
 
-import { PieChart } from 'react-native-svg-charts';
+import { PieChart } from 'react-native-gifted-charts';
 import SideBar from '../components/sidebar';
 import CardHorizontal from '../components/cardHorizontal';
 import * as Progress from 'react-native-progress';
@@ -14,14 +14,11 @@ import * as Progress from 'react-native-progress';
 
 export default function myDetailing() {
 
-    const data = [10, 20, 30]
-    const pieData = data.map((value, index) => ({
-        value,
-        key: `${index}-${value}`,
-        svg: {
-            fill: ['#6F90C9', '#98B0D8', '#3161B2'][index % 3]
-        }
-    }))
+    const pieData = [
+        { value: 10, color: '#6F90C9' },
+        { value: 20, color: '#98B0D8' },
+        { value: 30, color: '#3161B2' }
+    ];
 
     return (
         <View style={{ flex: 1 }}>
@@ -32,8 +29,11 @@ export default function myDetailing() {
                     <Text ></Text>
                 </View>
 
-                <View style={{ justifyContent: 'center', flex: 1 }}>
-                    <PieChart style={{ height: 300 }} data={pieData} />
+                <View style={{ justifyContent: 'center', alignItems: 'center', flex: 1, paddingVertical: 20 }}>
+                    <PieChart 
+                        data={pieData} 
+                        radius={120}
+                    />
                     <Text style={myDetailingStyle.valueGraf}>R$ 3.578</Text>
 
                 </View>
@@ -43,7 +43,7 @@ export default function myDetailing() {
                         <Text style={myDetailingStyle.title}>R$3.578</Text>
                     </View>
 
-                    <Progress.Bar progress={0.2} width={"90%"} color="#A0AEC0" />
+                    <Progress.Bar progress={0.2} width={null} color="#A0AEC0" />
 
                 </View>
 

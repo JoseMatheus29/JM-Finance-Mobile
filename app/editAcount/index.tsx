@@ -4,7 +4,7 @@ import ArrowBack from '../components/arrowBack';
 import { globalStyles } from '../style/globalStyles';
 import SideBar from '../components/sidebar';
 
-import { editAcountStyle } from './editAcountStyles';
+import { editAcountStyle } from '../styles/editAcountStyles';
 
 
 export default function editAcount() {

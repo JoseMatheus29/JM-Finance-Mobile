@@ -4,7 +4,7 @@ import ArrowBack from '../components/arrowBack';
 import { globalStyles } from '../style/globalStyles';
 import SideBar from '../components/sidebar';
 
-import { detailsSpendStyle } from './detailsSpendsStyles';
+import { detailsSpendStyle } from '../styles/detailsSpendsStyles';
 
 
 export default function detailsSpends() {

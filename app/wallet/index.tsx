@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, FlatList, TouchableOpacity, StyleSheet, ViewStyle } from 'react-native';
 import globalStyles from '../style/globalStyles';
-import { walletStyle } from './walletStyle';
+import { walletStyle } from '../styles/walletStyle';
 import { Card } from '../components/card';
 import ArrowBack from '../components/arrowBack';
 import SideBar from '../components/sidebar';

@@ -49,4 +49,5 @@ export const dashboardStyles = StyleSheet.create({
         width: 120,
       },
 });
-export default dashboardStyles; 
+
+export default dashboardStyles;

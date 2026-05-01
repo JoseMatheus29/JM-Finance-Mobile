@@ -7,7 +7,7 @@ import Card from '../components/card';
 import SideBar from '../components/sidebar';
 import ArrowBack from '../components/arrowBack';
 
-import { dashboardStyles } from './dashboardStyles';
+import { dashboardStyles } from '../styles/dashboardStyles';
 import { globalStyles } from '../style/globalStyles';
 
 export default function DashboardScreen() {
