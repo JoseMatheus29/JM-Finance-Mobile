@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, ScrollView, TouchableOpacity, SafeAreaView } from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { useRouter } from 'expo-router';
@@ -13,34 +13,27 @@ export default function DashboardScreen() {
   const router = useRouter();
 
   return (
-    <View style={{ flex: 1, backgroundColor: '#F7F9FC' }}>
+    <View className="flex-1 bg-[#F7F9FC]">
 
       {/* ── Header Gradient ── */}
       <LinearGradient
         colors={['#1E3F7A', '#3161B2', '#4A74BB']}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
-        style={{ paddingTop: 56, paddingBottom: 40, paddingHorizontal: 24 }}
+        className="pt-14 pb-10 px-6"
       >
-        <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+        <View className="flex-row justify-between items-center">
           <View>
-            <Text style={{ color: 'rgba(255,255,255,0.70)', fontSize: 14, marginBottom: 4 }}>
+            <Text className="text-white/70 text-sm mb-1">
               Bem-vindo de volta 👋
             </Text>
-            <Text style={{ color: '#fff', fontSize: 24, fontWeight: '800', letterSpacing: -0.3 }}>
+            <Text className="text-white text-2xl font-extrabold tracking-tight">
               Dashboard
             </Text>
           </View>
           <TouchableOpacity
             onPress={() => router.push('/editAcount')}
-            style={{
-              width: 44,
-              height: 44,
-              borderRadius: 22,
-              backgroundColor: 'rgba(255,255,255,0.2)',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
+            className="w-11 h-11 rounded-full bg-white/20 items-center justify-center"
           >
             <Icon name="person" size={22} color="#fff" />
           </TouchableOpacity>
@@ -49,12 +42,12 @@ export default function DashboardScreen() {
 
       {/* ── Scroll com card sobreposição ── */}
       <ScrollView
-        style={{ flex: 1, marginTop: -20 }}
+        className="flex-1 -mt-5"
         contentContainerStyle={{ paddingHorizontal: 20, paddingTop: 0, paddingBottom: 32 }}
         showsVerticalScrollIndicator={false}
       >
         {/* Resumo */}
-        <View style={{ marginBottom: 28 }}>
+        <View className="mb-7">
           <CardBalance
             valueTot={31627}
             valueEnt={10512}
@@ -63,11 +56,11 @@ export default function DashboardScreen() {
         </View>
 
         {/* Cartões */}
-        <View style={{ marginBottom: 28 }}>
-          <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 14 }}>
-            <Text style={{ fontSize: 17, fontWeight: '700', color: '#1A2B4A' }}>Meus Cartões</Text>
+        <View className="mb-7">
+          <View className="flex-row justify-between items-center mb-3.5">
+            <Text className="text-[17px] font-bold text-[#1A2B4A]">Meus Cartões</Text>
             <TouchableOpacity onPress={() => router.push('/wallet')}>
-              <Text style={{ fontSize: 13, color: '#3161B2', fontWeight: '600' }}>Ver todos</Text>
+              <Text className="text-[13px] text-[#3161B2] font-semibold">Ver todos</Text>
             </TouchableOpacity>
           </View>
           <Card
@@ -78,14 +71,14 @@ export default function DashboardScreen() {
         </View>
 
         {/* Categorias */}
-        <View style={{ marginBottom: 12 }}>
-          <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 14 }}>
-            <Text style={{ fontSize: 17, fontWeight: '700', color: '#1A2B4A' }}>Categorias</Text>
+        <View className="mb-3">
+          <View className="flex-row justify-between items-center mb-3.5">
+            <Text className="text-[17px] font-bold text-[#1A2B4A]">Categorias</Text>
             <TouchableOpacity onPress={() => router.push('/myDetailing')}>
-              <Text style={{ fontSize: 13, color: '#3161B2', fontWeight: '600' }}>Ver detalhes</Text>
+              <Text className="text-[13px] text-[#3161B2] font-semibold">Ver detalhes</Text>
             </TouchableOpacity>
           </View>
-          <View style={{ flexDirection: 'row', gap: 12 }}>
+          <View className="flex-row gap-3">
             <CategoryCard name="Transporte" value={1800} total={5000} />
             <CategoryCard name="Lazer" value={1200} total={5000} />
           </View>

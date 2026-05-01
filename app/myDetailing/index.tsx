@@ -3,7 +3,6 @@ import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { PieChart } from 'react-native-gifted-charts';
 import * as Progress from 'react-native-progress';
-import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import ArrowBack from '../components/arrowBack';
 import SideBar from '../components/sidebar';
@@ -22,62 +21,45 @@ const PIE_DATA = [
 ];
 
 export default function MyDetailing() {
-  const [selectedSlice, setSelectedSlice] = useState<number | null>(null);
   const totalGastos = 3578;
 
   return (
-    <View style={{ flex: 1, backgroundColor: '#F7F9FC' }}>
-
+    <View className="flex-1 bg-[#F7F9FC]">
       {/* Header */}
       <LinearGradient
         colors={['#254E8F', '#3161B2', '#4A74BB']}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
-        style={{ paddingTop: 52, paddingBottom: 28, paddingHorizontal: 20 }}
+        className="pt-[52px] pb-7 px-5"
       >
-        <View style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }}>
+        <View className="flex-row items-center gap-3">
           <ArrowBack />
-          <Text style={{ color: '#fff', fontSize: 20, fontWeight: '700' }}>
-            Meu Detalhamento
-          </Text>
+          <Text className="text-white text-xl font-bold">Meu Detalhamento</Text>
         </View>
       </LinearGradient>
 
       <ScrollView
-        style={{ flex: 1, marginTop: -16 }}
+        className="flex-1 -mt-4"
         contentContainerStyle={{ paddingBottom: 24 }}
         showsVerticalScrollIndicator={false}
       >
         {/* Gráfico Pizza */}
-        <View
-          style={{
-            backgroundColor: '#fff',
-            marginHorizontal: 16,
-            borderRadius: 24,
-            padding: 20,
-            marginBottom: 16,
-            shadowColor: '#3161B2',
-            shadowOffset: { width: 0, height: 4 },
-            shadowOpacity: 0.08,
-            shadowRadius: 16,
-            elevation: 4,
-          }}
-        >
-          <Text style={{ fontSize: 14, fontWeight: '700', color: '#1A2B4A', marginBottom: 16 }}>
+        <View className="bg-white mx-4 rounded-3xl p-5 mb-4 shadow-lg shadow-[#3161B2]/10 elevation-4">
+          <Text className="text-sm font-bold text-[#1A2B4A] mb-4">
             Distribuição de Gastos
           </Text>
 
-          <View style={{ flexDirection: 'row', alignItems: 'center', gap: 20 }}>
+          <View className="flex-row items-center gap-5">
             {/* Chart */}
-            <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+            <View className="items-center justify-center">
               <PieChart
                 data={PIE_DATA}
                 radius={80}
                 innerRadius={50}
                 centerLabelComponent={() => (
-                  <View style={{ alignItems: 'center' }}>
-                    <Text style={{ fontSize: 11, color: '#A0AEC0', fontWeight: '500' }}>Total</Text>
-                    <Text style={{ fontSize: 15, color: '#1A2B4A', fontWeight: '800' }}>
+                  <View className="items-center">
+                    <Text className="text-[11px] text-[#A0AEC0] font-medium">Total</Text>
+                    <Text className="text-[15px] text-[#1A2B4A] font-extrabold">
                       R${totalGastos.toLocaleString('pt-BR')}
                     </Text>
                   </View>
@@ -86,13 +68,13 @@ export default function MyDetailing() {
             </View>
 
             {/* Legenda */}
-            <View style={{ flex: 1, gap: 10 }}>
+            <View className="flex-1 gap-2.5">
               {PIE_DATA.map((item, i) => (
-                <View key={i} style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
-                  <View style={{ width: 10, height: 10, borderRadius: 5, backgroundColor: item.color }} />
-                  <View style={{ flex: 1 }}>
-                    <Text style={{ fontSize: 12, fontWeight: '600', color: '#1A2B4A' }}>{item.label}</Text>
-                    <Text style={{ fontSize: 10, color: '#A0AEC0' }}>{item.value}%</Text>
+                <View key={i} className="flex-row items-center gap-2">
+                  <View className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: item.color }} />
+                  <View className="flex-1">
+                    <Text className="text-xs font-semibold text-[#1A2B4A]">{item.label}</Text>
+                    <Text className="text-[10px] text-[#A0AEC0]">{item.value}%</Text>
                   </View>
                 </View>
               ))}
@@ -105,17 +87,12 @@ export default function MyDetailing() {
           colors={['#3161B2', '#4A74BB']}
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 0 }}
-          style={{
-            marginHorizontal: 16,
-            borderRadius: 20,
-            padding: 20,
-            marginBottom: 20,
-          }}
+          className="mx-4 rounded-[20px] p-5 mb-5"
         >
-          <Text style={{ color: 'rgba(255,255,255,0.75)', fontSize: 12, fontWeight: '500', marginBottom: 4 }}>
+          <Text className="text-white/75 text-xs font-medium mb-1">
             Gastos do Mês
           </Text>
-          <Text style={{ color: '#fff', fontSize: 28, fontWeight: '800', marginBottom: 16 }}>
+          <Text className="text-white text-[28px] font-extrabold mb-4">
             R$ {totalGastos.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
           </Text>
           <Progress.Bar
@@ -127,17 +104,17 @@ export default function MyDetailing() {
             borderRadius={4}
             height={6}
           />
-          <Text style={{ color: 'rgba(255,255,255,0.65)', fontSize: 11, marginTop: 6 }}>
+          <Text className="text-white/65 text-[11px] mt-1.5">
             72% do orçamento utilizado
           </Text>
         </LinearGradient>
 
         {/* Lista de Transações */}
-        <View style={{ paddingHorizontal: 16 }}>
-          <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
-            <Text style={{ fontSize: 16, fontWeight: '700', color: '#1A2B4A' }}>Seus Gastos</Text>
+        <View className="px-4">
+          <View className="flex-row justify-between items-center mb-3">
+            <Text className="text-base font-bold text-[#1A2B4A]">Seus Gastos</Text>
             <TouchableOpacity>
-              <Text style={{ fontSize: 13, color: '#3161B2', fontWeight: '600' }}>Ver todos</Text>
+              <Text className="text-[13px] text-[#3161B2] font-semibold">Ver todos</Text>
             </TouchableOpacity>
           </View>
           {MOCK_TRANSACTIONS.map((t) => (

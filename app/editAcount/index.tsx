@@ -36,23 +36,14 @@ const Field: React.FC<FieldProps> = ({
   const [showSecure, setShowSecure] = useState(false);
 
   return (
-    <View style={{ marginBottom: 14 }}>
-      <Text style={{ fontSize: 11, fontWeight: '700', color: '#7998CD', letterSpacing: 0.8, textTransform: 'uppercase', marginBottom: 6 }}>
+    <View className="mb-3.5">
+      <Text className="text-[11px] font-bold text-[#7998CD] tracking-[0.8px] uppercase mb-1.5">
         {label}
       </Text>
-      <View style={{
-        flexDirection: 'row',
-        alignItems: 'center',
-        backgroundColor: '#F7F9FC',
-        borderRadius: 16,
-        borderWidth: 1.5,
-        borderColor: focused ? '#3161B2' : '#E8EEF5',
-        paddingHorizontal: 14,
-        height: 52,
-      }}>
+      <View className={`flex-row items-center bg-[#F7F9FC] rounded-2xl border-[1.5px] px-3.5 h-[52px] ${focused ? 'border-[#3161B2]' : 'border-[#E8EEF5]'}`}>
         <Icon name={icon} size={18} color={focused ? '#3161B2' : '#A0AEC0'} />
         <TextInput
-          style={{ flex: 1, marginLeft: 10, fontSize: 15, color: '#1A2B4A' }}
+          className="flex-1 ml-2.5 text-[15px] text-[#1A2B4A]"
           placeholder={placeholder}
           placeholderTextColor="#C0CCDA"
           value={value}
@@ -88,7 +79,7 @@ export default function EditAcount() {
 
   return (
     <KeyboardAvoidingView
-      style={{ flex: 1, backgroundColor: '#F7F9FC' }}
+      className="flex-1 bg-[#F7F9FC]"
       behavior={Platform.OS === 'ios' ? 'padding' : undefined}
     >
       {/* ── Header ── */}
@@ -96,61 +87,46 @@ export default function EditAcount() {
         colors={['#1E3F7A', '#3161B2', '#4A74BB']}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
-        style={{ paddingTop: 56, paddingBottom: 52, paddingHorizontal: 24 }}
+        className="pt-14 pb-[52px] px-6"
       >
-        <View style={{ flexDirection: 'row', alignItems: 'center', gap: 12, marginBottom: 24 }}>
+        <View className="flex-row items-center gap-3 mb-6">
           <ArrowBack />
-          <Text style={{ color: '#fff', fontSize: 20, fontWeight: '700' }}>Meu Perfil</Text>
+          <Text className="text-white text-xl font-bold">Meu Perfil</Text>
         </View>
 
         {/* Avatar centralizado que fica "flutuando" */}
-        <View style={{ alignItems: 'center' }}>
-          <View style={{ position: 'relative' }}>
-            <View style={{
-              width: 86, height: 86, borderRadius: 43,
-              backgroundColor: 'rgba(255,255,255,0.2)',
-              alignItems: 'center', justifyContent: 'center',
-              borderWidth: 3, borderColor: 'rgba(255,255,255,0.5)',
-            }}>
+        <View className="items-center">
+          <View className="relative">
+            <View className="w-[86px] h-[86px] rounded-full bg-white/20 items-center justify-center border-4 border-white/50">
               <Icon name="person" size={44} color="#fff" />
             </View>
             {/* Badge editar */}
-            <TouchableOpacity style={{
-              position: 'absolute', bottom: 0, right: 0,
-              width: 28, height: 28, borderRadius: 14,
-              backgroundColor: '#fff', alignItems: 'center', justifyContent: 'center',
-              shadowColor: '#000', shadowOpacity: 0.15, shadowRadius: 4, elevation: 4,
-            }}>
+            <TouchableOpacity className="absolute bottom-0 right-0 w-7 h-7 rounded-full bg-white items-center justify-center shadow-md elevation-4">
               <Icon name="camera-alt" size={14} color="#3161B2" />
             </TouchableOpacity>
           </View>
-          <Text style={{ color: '#fff', fontSize: 17, fontWeight: '700', marginTop: 10 }}>
+          <Text className="text-white text-[17px] font-bold mt-2.5">
             João Silva Souza
           </Text>
-          <Text style={{ color: 'rgba(255,255,255,0.65)', fontSize: 13, marginTop: 2 }}>
+          <Text className="text-white/65 text-[13px] mt-0.5">
             joao@email.com
           </Text>
         </View>
       </LinearGradient>
 
       <ScrollView
-        style={{ flex: 1, marginTop: -24 }}
+        className="flex-1 -mt-6"
         contentContainerStyle={{ paddingHorizontal: 20, paddingBottom: 32 }}
         showsVerticalScrollIndicator={false}
         keyboardShouldPersistTaps="handled"
       >
         {/* ── Card Informações Básicas ── */}
-        <View style={{
-          backgroundColor: '#fff', borderRadius: 24,
-          padding: 20, marginBottom: 16,
-          shadowColor: '#3161B2', shadowOffset: { width: 0, height: 4 },
-          shadowOpacity: 0.07, shadowRadius: 16, elevation: 4,
-        }}>
-          <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8, marginBottom: 18 }}>
-            <View style={{ width: 32, height: 32, borderRadius: 10, backgroundColor: 'rgba(49,97,178,0.1)', alignItems: 'center', justifyContent: 'center' }}>
+        <View className="bg-white rounded-[24px] p-5 mb-4 shadow-lg shadow-[#3161B2]/10 elevation-4">
+          <View className="flex-row items-center gap-2 mb-4">
+            <View className="w-8 h-8 rounded-xl bg-[#3161B2]/10 items-center justify-center">
               <Icon name="person" size={16} color="#3161B2" />
             </View>
-            <Text style={{ fontSize: 15, fontWeight: '700', color: '#1A2B4A' }}>
+            <Text className="text-[15px] font-bold text-[#1A2B4A]">
               Informações Básicas
             </Text>
           </View>
@@ -182,17 +158,12 @@ export default function EditAcount() {
         </View>
 
         {/* ── Card Alterar Senha ── */}
-        <View style={{
-          backgroundColor: '#fff', borderRadius: 24,
-          padding: 20, marginBottom: 24,
-          shadowColor: '#3161B2', shadowOffset: { width: 0, height: 4 },
-          shadowOpacity: 0.07, shadowRadius: 16, elevation: 4,
-        }}>
-          <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8, marginBottom: 18 }}>
-            <View style={{ width: 32, height: 32, borderRadius: 10, backgroundColor: 'rgba(49,97,178,0.1)', alignItems: 'center', justifyContent: 'center' }}>
+        <View className="bg-white rounded-[24px] p-5 mb-6 shadow-lg shadow-[#3161B2]/10 elevation-4">
+          <View className="flex-row items-center gap-2 mb-4">
+            <View className="w-8 h-8 rounded-xl bg-[#3161B2]/10 items-center justify-center">
               <Icon name="lock" size={16} color="#3161B2" />
             </View>
-            <Text style={{ fontSize: 15, fontWeight: '700', color: '#1A2B4A' }}>
+            <Text className="text-[15px] font-bold text-[#1A2B4A]">
               Alterar Senha
             </Text>
           </View>
@@ -229,29 +200,24 @@ export default function EditAcount() {
             colors={['#3161B2', '#4A74BB']}
             start={{ x: 0, y: 0 }}
             end={{ x: 1, y: 0 }}
-            style={{
-              height: 54, borderRadius: 18,
-              alignItems: 'center', justifyContent: 'center', flexDirection: 'row', gap: 8,
-              shadowColor: '#3161B2', shadowOffset: { width: 0, height: 8 },
-              shadowOpacity: 0.3, shadowRadius: 12, elevation: 8,
-            }}
+            className="h-[54px] rounded-2xl items-center justify-center flex-row gap-2 shadow-xl shadow-[#3161B2]/30 elevation-8"
           >
             <Icon name="check-circle" size={20} color="#fff" />
-            <Text style={{ color: '#fff', fontSize: 16, fontWeight: '700' }}>Salvar Alterações</Text>
+            <Text className="text-white text-base font-bold">Salvar Alterações</Text>
           </LinearGradient>
         </Pressable>
 
         {/* Link logout */}
         <TouchableOpacity
-          style={{ alignItems: 'center', marginTop: 20 }}
+          className="items-center mt-5"
           onPress={() => Alert.alert('Sair', 'Deseja sair da conta?', [
             { text: 'Cancelar', style: 'cancel' },
             { text: 'Sair', style: 'destructive', onPress: () => {} },
           ])}
         >
-          <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6 }}>
+          <View className="flex-row items-center gap-1.5">
             <Icon name="logout" size={16} color="#A83636" />
-            <Text style={{ color: '#A83636', fontSize: 14, fontWeight: '600' }}>Sair da conta</Text>
+            <Text className="text-[#A83636] text-sm font-semibold">Sair da conta</Text>
           </View>
         </TouchableOpacity>
       </ScrollView>

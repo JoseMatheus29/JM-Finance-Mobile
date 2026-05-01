@@ -10,14 +10,7 @@ const ArrowBack = () => {
     <TouchableOpacity
       onPress={() => router.back()}
       activeOpacity={0.7}
-      style={{
-        width: 36,
-        height: 36,
-        borderRadius: 12,
-        backgroundColor: '#EBF1F6',
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}
+      className="w-9 h-9 rounded-xl bg-[#EBF1F6] items-center justify-center"
     >
       <Icon name="arrow-back" size={20} color="#3161B2" />
     </TouchableOpacity>

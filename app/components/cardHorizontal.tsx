@@ -40,53 +40,32 @@ const CardHorizontal: React.FC<CardHorizontalProps> = ({
   return (
     <TouchableOpacity
       activeOpacity={0.75}
-      style={{
-        flexDirection: 'row',
-        alignItems: 'center',
-        backgroundColor: '#fff',
-        borderRadius: 16,
-        padding: 14,
-        marginBottom: 10,
-        borderWidth: 1,
-        borderColor: '#EBF1F6',
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.04,
-        shadowRadius: 8,
-        elevation: 2,
-      }}
+      className="flex-row items-center bg-white rounded-2xl p-3.5 mb-2.5 border border-[#EBF1F6] shadow-sm shadow-black/5 elevation-2"
     >
       {/* Ícone */}
       <View
-        style={{
-          width: 46,
-          height: 46,
-          borderRadius: 14,
-          backgroundColor: iconBg,
-          alignItems: 'center',
-          justifyContent: 'center',
-          marginRight: 12,
-        }}
+        className="w-[46px] h-[46px] rounded-[14px] items-center justify-center mr-3"
+        style={{ backgroundColor: iconBg }}
       >
         <Icon name={iconName} size={22} color={iconColor} />
       </View>
 
       {/* Info */}
-      <View style={{ flex: 1 }}>
-        <Text style={{ fontSize: 14, fontWeight: '700', color: '#1A2B4A', marginBottom: 3 }}>
+      <View className="flex-1">
+        <Text className="text-sm font-bold text-[#1A2B4A] mb-1">
           {name}
         </Text>
-        <Text style={{ fontSize: 12, color: '#A0AEC0', fontWeight: '400' }}>
+        <Text className="text-xs text-[#A0AEC0] font-normal">
           {date}
         </Text>
       </View>
 
       {/* Valor */}
-      <View style={{ alignItems: 'flex-end' }}>
-        <Text style={{ fontSize: 15, fontWeight: '800', color: amountColor }}>
+      <View className="items-end">
+        <Text className="text-[15px] font-extrabold" style={{ color: amountColor }}>
           {amountPrefix} R$ {formatCurrency(amount)}
         </Text>
-        <Text style={{ fontSize: 10, color: '#A0AEC0', marginTop: 2 }}>
+        <Text className="text-[10px] text-[#A0AEC0] mt-0.5">
           {category}
         </Text>
       </View>

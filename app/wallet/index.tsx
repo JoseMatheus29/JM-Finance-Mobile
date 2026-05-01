@@ -4,7 +4,6 @@ import {
   Text,
   FlatList,
   TouchableOpacity,
-  Animated,
   Dimensions,
   ScrollView,
 } from 'react-native';
@@ -52,39 +51,33 @@ export default function WalletScreen() {
   };
 
   return (
-    <View style={{ flex: 1, backgroundColor: '#F7F9FC' }}>
+    <View className="flex-1 bg-[#F7F9FC]">
 
       {/* Header */}
       <LinearGradient
         colors={['#254E8F', '#3161B2', '#4A74BB']}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
-        style={{ paddingTop: 52, paddingBottom: 28, paddingHorizontal: 20 }}
+        className="pt-14 pb-7 px-5"
       >
-        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
-          <View style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }}>
+        <View className="flex-row items-center justify-between">
+          <View className="flex-row items-center gap-3">
             <ArrowBack />
-            <Text style={{ color: '#fff', fontSize: 20, fontWeight: '700' }}>Carteira</Text>
+            <Text className="text-white text-xl font-bold">Carteira</Text>
           </View>
-          <TouchableOpacity
-            style={{
-              width: 36, height: 36, borderRadius: 12,
-              backgroundColor: 'rgba(255,255,255,0.2)',
-              alignItems: 'center', justifyContent: 'center',
-            }}
-          >
+          <TouchableOpacity className="w-9 h-9 rounded-xl bg-white/20 items-center justify-center">
             <Icon name="add" size={20} color="#fff" />
           </TouchableOpacity>
         </View>
       </LinearGradient>
 
       <ScrollView
-        style={{ flex: 1, marginTop: -16 }}
+        className="flex-1 -mt-4"
         contentContainerStyle={{ paddingBottom: 24 }}
         showsVerticalScrollIndicator={false}
       >
         {/* Carrossel de Cards */}
-        <View style={{ marginBottom: 12 }}>
+        <View className="mb-3">
           <FlatList
             ref={flatListRef}
             data={CARDS}
@@ -94,11 +87,11 @@ export default function WalletScreen() {
             snapToInterval={CARD_WIDTH}
             decelerationRate="fast"
             contentContainerStyle={{ paddingHorizontal: 24 }}
-            ItemSeparatorComponent={() => <View style={{ width: 0 }} />}
+            ItemSeparatorComponent={() => <View className="w-0" />}
             onMomentumScrollEnd={handleCardChange}
             keyExtractor={(item) => item.id.toString()}
             renderItem={({ item }) => (
-              <View style={{ width: CARD_WIDTH, paddingRight: 0 }}>
+              <View style={{ width: CARD_WIDTH }}>
                 <Card
                   cardName={item.name}
                   cardNumber={`****${item.number}`}
@@ -110,7 +103,7 @@ export default function WalletScreen() {
           />
 
           {/* Dots indicadores */}
-          <View style={{ flexDirection: 'row', justifyContent: 'center', gap: 6, marginTop: 14 }}>
+          <View className="flex-row justify-center gap-1.5 mt-3.5">
             {CARDS.map((_, i) => (
               <TouchableOpacity
                 key={i}
@@ -118,52 +111,35 @@ export default function WalletScreen() {
                   flatListRef.current?.scrollToIndex({ index: i, animated: true });
                   setActiveIndex(i);
                 }}
-                style={{
-                  width: i === activeIndex ? 20 : 6,
-                  height: 6,
-                  borderRadius: 3,
-                  backgroundColor: i === activeIndex ? '#3161B2' : '#CBD5E0',
-                }}
+                className={`h-1.5 rounded-full ${i === activeIndex ? 'w-5 bg-[#3161B2]' : 'w-1.5 bg-[#CBD5E0]'}`}
               />
             ))}
           </View>
         </View>
 
         {/* Resumo do card ativo */}
-        <View
-          style={{
-            marginHorizontal: 16,
-            backgroundColor: '#fff',
-            borderRadius: 20,
-            padding: 16,
-            marginBottom: 20,
-            flexDirection: 'row',
-            justifyContent: 'space-around',
-            borderWidth: 1,
-            borderColor: '#EBF1F6',
-          }}
-        >
+        <View className="mx-4 bg-white rounded-[20px] p-4 mb-5 flex-row justify-around border border-[#EBF1F6]">
           {[
             { label: 'Receitas', value: 'R$ 1.250', icon: 'arrow-downward', color: '#36A83A', bg: 'rgba(54,168,58,0.1)' },
             { label: 'Despesas', value: 'R$ 618', icon: 'arrow-upward', color: '#A83636', bg: 'rgba(168,54,54,0.1)' },
             { label: 'Saldo', value: `R$ ${activeCard.balance.toLocaleString('pt-BR', { minimumFractionDigits: 0 })}`, icon: 'account-balance', color: '#3161B2', bg: 'rgba(49,97,178,0.1)' },
           ].map((stat, i) => (
-            <View key={i} style={{ alignItems: 'center' }}>
-              <View style={{ width: 36, height: 36, borderRadius: 12, backgroundColor: stat.bg, alignItems: 'center', justifyContent: 'center', marginBottom: 6 }}>
+            <View key={i} className="items-center">
+              <View className="w-9 h-9 rounded-xl items-center justify-center mb-1.5" style={{ backgroundColor: stat.bg }}>
                 <Icon name={stat.icon} size={16} color={stat.color} />
               </View>
-              <Text style={{ fontSize: 13, fontWeight: '700', color: '#1A2B4A' }}>{stat.value}</Text>
-              <Text style={{ fontSize: 10, color: '#A0AEC0', marginTop: 1 }}>{stat.label}</Text>
+              <Text className="text-[13px] font-bold text-[#1A2B4A]">{stat.value}</Text>
+              <Text className="text-[10px] text-[#A0AEC0] mt-0.5">{stat.label}</Text>
             </View>
           ))}
         </View>
 
         {/* Transações */}
-        <View style={{ paddingHorizontal: 16 }}>
-          <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
-            <Text style={{ fontSize: 16, fontWeight: '700', color: '#1A2B4A' }}>Transações</Text>
+        <View className="px-4">
+          <View className="flex-row justify-between items-center mb-3">
+            <Text className="text-base font-bold text-[#1A2B4A]">Transações</Text>
             <TouchableOpacity>
-              <Text style={{ fontSize: 13, color: '#3161B2', fontWeight: '600' }}>Filtrar</Text>
+              <Text className="text-[13px] text-[#3161B2] font-semibold">Filtrar</Text>
             </TouchableOpacity>
           </View>
           {TRANSACTIONS.map((t) => (

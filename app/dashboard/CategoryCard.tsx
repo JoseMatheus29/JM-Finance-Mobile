@@ -27,57 +27,34 @@ export const CategoryCard: React.FC<CardCategory> = ({ value, total, name }) => 
   return (
     <TouchableOpacity
       activeOpacity={0.8}
-      style={{
-        flex: 1,
-        backgroundColor: '#fff',
-        borderRadius: 20,
-        padding: 16,
-        borderWidth: 1,
-        borderColor: '#EBF1F6',
-        shadowColor: '#3161B2',
-        shadowOffset: { width: 0, height: 4 },
-        shadowOpacity: 0.06,
-        shadowRadius: 12,
-        elevation: 3,
-      }}
+      className="flex-1 bg-white rounded-[20px] p-4 border border-[#EBF1F6] shadow-md shadow-[#3161B2]/5 elevation-3"
     >
       {/* Ícone */}
       <View
-        style={{
-          width: 44,
-          height: 44,
-          borderRadius: 14,
-          backgroundColor: config.bg,
-          alignItems: 'center',
-          justifyContent: 'center',
-          marginBottom: 12,
-        }}
+        className="w-11 h-11 rounded-[14px] items-center justify-center mb-3"
+        style={{ backgroundColor: config.bg }}
       >
         <Icon name={config.icon} size={22} color={config.color} />
       </View>
 
       {/* Label */}
-      <Text style={{ fontSize: 12, color: '#718096', fontWeight: '500', marginBottom: 4 }}>
+      <Text className="text-xs text-[#718096] font-medium mb-1">
         {name}
       </Text>
 
       {/* Valor */}
-      <Text style={{ fontSize: 18, fontWeight: '800', color: '#1A2B4A', marginBottom: 10 }}>
+      <Text className="text-lg font-extrabold text-[#1A2B4A] mb-2.5">
         R$ {formatCurrency(value)}
       </Text>
 
       {/* Barra de progresso */}
-      <View style={{ height: 4, backgroundColor: '#EBF1F6', borderRadius: 2, overflow: 'hidden' }}>
+      <View className="h-1 bg-[#EBF1F6] rounded-sm overflow-hidden">
         <View
-          style={{
-            height: '100%',
-            width: `${pct}%`,
-            backgroundColor: config.color,
-            borderRadius: 2,
-          }}
+          className="h-full rounded-sm"
+          style={{ width: `${pct}%`, backgroundColor: config.color }}
         />
       </View>
-      <Text style={{ fontSize: 10, color: '#A0AEC0', marginTop: 4 }}>
+      <Text className="text-[10px] text-[#A0AEC0] mt-1">
         {pct.toFixed(0)}% do orçamento
       </Text>
     </TouchableOpacity>

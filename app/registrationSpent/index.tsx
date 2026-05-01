@@ -77,11 +77,9 @@ export default function RegistrationSpent() {
     ]);
   };
 
-  const selectedCategory = CATEGORIES.find(c => c.id === selectedCat);
-
   return (
     <KeyboardAvoidingView
-      style={{ flex: 1, backgroundColor: '#F7F9FC' }}
+      className="flex-1 bg-[#F7F9FC]"
       behavior={Platform.OS === 'ios' ? 'padding' : undefined}
     >
       {/* ── Header Dinâmico ── */}
@@ -89,47 +87,36 @@ export default function RegistrationSpent() {
         colors={gradientColors}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
-        style={{ paddingTop: 56, paddingBottom: 52, paddingHorizontal: 24 }}
+        className="pt-14 pb-[52px] px-6"
       >
         {/* Topo */}
-        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: 28 }}>
+        <View className="flex-row items-center justify-between mb-7">
           <TouchableOpacity
             onPress={() => router.back()}
-            style={{ width: 36, height: 36, borderRadius: 12, backgroundColor: 'rgba(255,255,255,0.2)', alignItems: 'center', justifyContent: 'center' }}
+            className="w-9 h-9 rounded-xl bg-white/20 items-center justify-center"
           >
             <Icon name="close" size={20} color="#fff" />
           </TouchableOpacity>
-          <Text style={{ color: '#fff', fontSize: 17, fontWeight: '700' }}>Nova Transação</Text>
-          <View style={{ width: 36 }} />
+          <Text className="text-white text-[17px] font-bold">Nova Transação</Text>
+          <View className="w-9" />
         </View>
 
         {/* Toggle Entrada / Saída */}
-        <View style={{
-          flexDirection: 'row',
-          backgroundColor: 'rgba(255,255,255,0.15)',
-          borderRadius: 14,
-          padding: 4,
-          marginBottom: 28,
-        }}>
+        <View className="flex-row bg-white/15 rounded-[14px] p-1 mb-7">
           {(['expense', 'income'] as TxType[]).map((t) => {
             const active = type === t;
             return (
               <TouchableOpacity
                 key={t}
                 onPress={() => setType(t)}
-                style={{
-                  flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 6,
-                  paddingVertical: 10,
-                  borderRadius: 11,
-                  backgroundColor: active ? 'rgba(255,255,255,0.25)' : 'transparent',
-                }}
+                className={`flex-1 flex-row items-center justify-center gap-1.5 py-2.5 rounded-[11px] ${active ? 'bg-white/25' : 'bg-transparent'}`}
               >
                 <Icon
                   name={t === 'expense' ? 'arrow-upward' : 'arrow-downward'}
                   size={16}
                   color="#fff"
                 />
-                <Text style={{ color: '#fff', fontWeight: active ? '700' : '400', fontSize: 14 }}>
+                <Text className={`text-white text-sm ${active ? 'font-bold' : 'font-normal'}`}>
                   {t === 'expense' ? 'Saída' : 'Entrada'}
                 </Text>
               </TouchableOpacity>
@@ -138,16 +125,16 @@ export default function RegistrationSpent() {
         </View>
 
         {/* Campo Valor em destaque */}
-        <View style={{ alignItems: 'center' }}>
-          <Text style={{ color: 'rgba(255,255,255,0.7)', fontSize: 13, fontWeight: '500', marginBottom: 6 }}>
+        <View className="items-center">
+          <Text className="text-white/70 text-[13px] font-medium mb-1.5">
             Valor
           </Text>
-          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-            <Text style={{ color: 'rgba(255,255,255,0.8)', fontSize: 28, fontWeight: '700', marginRight: 4 }}>
+          <View className="flex-row items-center">
+            <Text className="text-white/80 text-[28px] font-bold mr-1">
               R$
             </Text>
             <TextInput
-              style={{ color: '#fff', fontSize: 42, fontWeight: '800', minWidth: 100, textAlign: 'center' }}
+              className="text-white text-[42px] font-extrabold min-w-[100px] text-center"
               placeholder="0,00"
               placeholderTextColor="rgba(255,255,255,0.4)"
               keyboardType="numeric"
@@ -155,25 +142,22 @@ export default function RegistrationSpent() {
               onChangeText={handleAmountChange}
             />
           </View>
-          <View style={{ height: 2, width: 140, backgroundColor: 'rgba(255,255,255,0.35)', marginTop: 4, borderRadius: 1 }} />
+          <View className="h-0.5 w-[140px] bg-white/35 mt-1 rounded-[1px]" />
         </View>
       </LinearGradient>
 
       <ScrollView
-        style={{ flex: 1, marginTop: -20 }}
+        className="flex-1 -mt-5"
         contentContainerStyle={{ paddingHorizontal: 20, paddingBottom: 32 }}
         showsVerticalScrollIndicator={false}
         keyboardShouldPersistTaps="handled"
       >
         {/* ── Card Categoria ── */}
-        <View style={{
-          backgroundColor: '#fff', borderRadius: 24, padding: 20, marginBottom: 16,
-          shadowColor: '#000', shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.06, shadowRadius: 16, elevation: 4,
-        }}>
-          <Text style={{ fontSize: 13, fontWeight: '700', color: '#1A2B4A', marginBottom: 14 }}>
+        <View className="bg-white rounded-[24px] p-5 mb-4 shadow-lg shadow-black/5 elevation-4">
+          <Text className="text-[13px] font-bold text-[#1A2B4A] mb-3.5">
             Categoria
           </Text>
-          <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 10 }}>
+          <View className="flex-row flex-wrap gap-2.5">
             {CATEGORIES.map((cat) => {
               const active = selectedCat === cat.id;
               return (
@@ -181,16 +165,11 @@ export default function RegistrationSpent() {
                   key={cat.id}
                   onPress={() => setSelectedCat(cat.id)}
                   activeOpacity={0.8}
-                  style={{
-                    flexDirection: 'row', alignItems: 'center', gap: 6,
-                    paddingHorizontal: 12, paddingVertical: 8, borderRadius: 12,
-                    backgroundColor: active ? cat.bg : '#F7F9FC',
-                    borderWidth: 1.5,
-                    borderColor: active ? cat.color : 'transparent',
-                  }}
+                  className={`flex-row items-center gap-1.5 px-3 py-2 rounded-xl border-[1.5px] ${active ? '' : 'bg-[#F7F9FC] border-transparent'}`}
+                  style={{ backgroundColor: active ? cat.bg : undefined, borderColor: active ? cat.color : undefined }}
                 >
                   <Icon name={cat.icon} size={16} color={active ? cat.color : '#A0AEC0'} />
-                  <Text style={{ fontSize: 12, fontWeight: active ? '700' : '500', color: active ? cat.color : '#718096' }}>
+                  <Text className={`text-xs ${active ? 'font-bold' : 'font-medium'}`} style={{ color: active ? cat.color : '#718096' }}>
                     {cat.name}
                   </Text>
                 </TouchableOpacity>
@@ -200,27 +179,20 @@ export default function RegistrationSpent() {
         </View>
 
         {/* ── Card Detalhes ── */}
-        <View style={{
-          backgroundColor: '#fff', borderRadius: 24, padding: 20, marginBottom: 24,
-          shadowColor: '#000', shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.06, shadowRadius: 16, elevation: 4,
-        }}>
-          <Text style={{ fontSize: 13, fontWeight: '700', color: '#1A2B4A', marginBottom: 14 }}>
+        <View className="bg-white rounded-[24px] p-5 mb-6 shadow-lg shadow-black/5 elevation-4">
+          <Text className="text-[13px] font-bold text-[#1A2B4A] mb-3.5">
             Detalhes
           </Text>
 
           {/* Nome */}
-          <View style={{ marginBottom: 14 }}>
-            <Text style={{ fontSize: 11, fontWeight: '700', color: '#7998CD', letterSpacing: 0.8, textTransform: 'uppercase', marginBottom: 6 }}>
+          <View className="mb-3.5">
+            <Text className="text-[11px] font-bold text-[#7998CD] tracking-[0.8px] uppercase mb-1.5">
               Nome
             </Text>
-            <View style={{
-              flexDirection: 'row', alignItems: 'center', backgroundColor: '#F7F9FC',
-              borderRadius: 14, borderWidth: 1.5, borderColor: focused === 'nome' ? primaryColor : '#E8EEF5',
-              paddingHorizontal: 14, height: 50,
-            }}>
+            <View className={`flex-row items-center bg-[#F7F9FC] rounded-[14px] border-[1.5px] px-3.5 h-[50px] ${focused === 'nome' ? 'border-[#3161B2]' : 'border-[#E8EEF5]'}`}>
               <Icon name="edit" size={16} color={focused === 'nome' ? primaryColor : '#A0AEC0'} />
               <TextInput
-                style={{ flex: 1, marginLeft: 10, fontSize: 14, color: '#1A2B4A' }}
+                className="flex-1 ml-2.5 text-[14px] text-[#1A2B4A]"
                 placeholder="Ex: Almoço no restaurante"
                 placeholderTextColor="#C0CCDA"
                 value={nome}
@@ -233,17 +205,14 @@ export default function RegistrationSpent() {
           </View>
 
           {/* Descrição */}
-          <View style={{ marginBottom: 14 }}>
-            <Text style={{ fontSize: 11, fontWeight: '700', color: '#7998CD', letterSpacing: 0.8, textTransform: 'uppercase', marginBottom: 6 }}>
+          <View className="mb-3.5">
+            <Text className="text-[11px] font-bold text-[#7998CD] tracking-[0.8px] uppercase mb-1.5">
               Descrição (opcional)
             </Text>
-            <View style={{
-              backgroundColor: '#F7F9FC', borderRadius: 14,
-              borderWidth: 1.5, borderColor: focused === 'desc' ? primaryColor : '#E8EEF5',
-              paddingHorizontal: 14, paddingVertical: 12,
-            }}>
+            <View className={`bg-[#F7F9FC] rounded-[14px] border-[1.5px] px-3.5 py-3 ${focused === 'desc' ? 'border-[#3161B2]' : 'border-[#E8EEF5]'}`}>
               <TextInput
-                style={{ fontSize: 14, color: '#1A2B4A', minHeight: 60, textAlignVertical: 'top' }}
+                className="text-[14px] text-[#1A2B4A] min-h-[60px]"
+                style={{ textAlignVertical: 'top' }}
                 placeholder="Adicione uma observação..."
                 placeholderTextColor="#C0CCDA"
                 value={descricao}
@@ -256,23 +225,17 @@ export default function RegistrationSpent() {
             </View>
           </View>
 
-          {/* Data (estático por hora) */}
+          {/* Data */}
           <View>
-            <Text style={{ fontSize: 11, fontWeight: '700', color: '#7998CD', letterSpacing: 0.8, textTransform: 'uppercase', marginBottom: 6 }}>
+            <Text className="text-[11px] font-bold text-[#7998CD] tracking-[0.8px] uppercase mb-1.5">
               Data
             </Text>
-            <TouchableOpacity
-              style={{
-                flexDirection: 'row', alignItems: 'center', backgroundColor: '#F7F9FC',
-                borderRadius: 14, borderWidth: 1.5, borderColor: '#E8EEF5',
-                paddingHorizontal: 14, height: 50,
-              }}
-            >
+            <TouchableOpacity className="flex-row items-center bg-[#F7F9FC] rounded-[14px] border-[1.5px] border-[#E8EEF5] px-3.5 h-[50px]">
               <Icon name="calendar-today" size={16} color="#A0AEC0" />
-              <Text style={{ marginLeft: 10, fontSize: 14, color: '#718096' }}>
+              <Text className="ml-2.5 text-[14px] text-[#718096]">
                 {new Date().toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' })}
               </Text>
-              <Icon name="chevron-right" size={18} color="#C0CCDA" style={{ marginLeft: 'auto' }} />
+              <Icon name="chevron-right" size={18} color="#C0CCDA" className="ml-auto" />
             </TouchableOpacity>
           </View>
         </View>
@@ -283,15 +246,11 @@ export default function RegistrationSpent() {
             colors={gradientColors.slice(0, 2) as [string, string]}
             start={{ x: 0, y: 0 }}
             end={{ x: 1, y: 0 }}
-            style={{
-              height: 56, borderRadius: 18,
-              alignItems: 'center', justifyContent: 'center', flexDirection: 'row', gap: 8,
-              shadowColor: primaryColor, shadowOffset: { width: 0, height: 8 },
-              shadowOpacity: 0.35, shadowRadius: 12, elevation: 8,
-            }}
+            className="h-14 rounded-[18px] items-center justify-center flex-row gap-2 shadow-xl elevation-8"
+            style={{ shadowColor: primaryColor }}
           >
             <Icon name="check-circle" size={20} color="#fff" />
-            <Text style={{ color: '#fff', fontSize: 16, fontWeight: '700' }}>
+            <Text className="text-white text-base font-bold">
               Registrar {isExpense ? 'Saída' : 'Entrada'}
             </Text>
           </LinearGradient>

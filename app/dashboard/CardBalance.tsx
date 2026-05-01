@@ -16,53 +16,48 @@ export const CardBalance: React.FC<BalanceCard> = ({ valueTot, valueEnt, valueSa
   return (
     <LinearGradient
       colors={['rgba(49,97,178,0.08)', '#EBF1F6']}
-      style={{
-        borderRadius: 24,
-        padding: 24,
-        borderWidth: 1,
-        borderColor: '#D4E1EF',
-      }}
+      className="rounded-[24px] p-6 border border-[#D4E1EF]"
     >
       {/* Saldo principal */}
-      <View style={{ marginBottom: 20 }}>
-        <Text style={{ fontSize: 12, color: '#7998CD', fontWeight: '600', letterSpacing: 0.8, textTransform: 'uppercase', marginBottom: 4 }}>
+      <View className="mb-5">
+        <Text className="text-xs text-[#7998CD] font-semibold tracking-[0.8px] uppercase mb-1">
           Saldo Mensal
         </Text>
-        <Text style={{ fontSize: 32, fontWeight: '800', color: '#1A2B4A', letterSpacing: -0.5 }}>
+        <Text className="text-[32px] font-extrabold text-[#1A2B4A] tracking-tight">
           R$ {formatCurrency(valueTot)}
         </Text>
       </View>
 
       {/* Divisor */}
-      <View style={{ height: 1, backgroundColor: '#D4E1EF', marginBottom: 16 }} />
+      <View className="h-[1px] bg-[#D4E1EF] mb-4" />
 
       {/* Entradas e Saídas */}
-      <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+      <View className="flex-row justify-between">
         {/* Entradas */}
-        <View style={{ flex: 1 }}>
-          <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6, marginBottom: 4 }}>
-            <View style={{ width: 28, height: 28, borderRadius: 14, backgroundColor: 'rgba(54,168,58,0.12)', alignItems: 'center', justifyContent: 'center' }}>
+        <View className="flex-1">
+          <View className="flex-row items-center gap-1.5 mb-1">
+            <View className="w-7 h-7 rounded-full bg-[rgba(54,168,58,0.12)] items-center justify-center">
               <Icon name="arrow-downward" size={14} color="#36A83A" />
             </View>
-            <Text style={{ fontSize: 12, color: '#718096', fontWeight: '500' }}>Entradas</Text>
+            <Text className="text-xs text-[#718096] font-medium">Entradas</Text>
           </View>
-          <Text style={{ fontSize: 18, fontWeight: '700', color: '#36A83A' }}>
+          <Text className="text-lg font-bold text-[#36A83A]">
             R$ {formatCurrency(valueEnt)}
           </Text>
         </View>
 
         {/* Separador vertical */}
-        <View style={{ width: 1, backgroundColor: '#D4E1EF', marginHorizontal: 16 }} />
+        <View className="w-[1px] bg-[#D4E1EF] mx-4" />
 
         {/* Saídas */}
-        <View style={{ flex: 1 }}>
-          <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6, marginBottom: 4 }}>
-            <View style={{ width: 28, height: 28, borderRadius: 14, backgroundColor: 'rgba(168,54,54,0.12)', alignItems: 'center', justifyContent: 'center' }}>
+        <View className="flex-1">
+          <View className="flex-row items-center gap-1.5 mb-1">
+            <View className="w-7 h-7 rounded-full bg-[rgba(168,54,54,0.12)] items-center justify-center">
               <Icon name="arrow-upward" size={14} color="#A83636" />
             </View>
-            <Text style={{ fontSize: 12, color: '#718096', fontWeight: '500' }}>Saídas</Text>
+            <Text className="text-xs text-[#718096] font-medium">Saídas</Text>
           </View>
-          <Text style={{ fontSize: 18, fontWeight: '700', color: '#A83636' }}>
+          <Text className="text-lg font-bold text-[#A83636]">
             R$ {formatCurrency(valueSai)}
           </Text>
         </View>
