@@ -1,86 +1,173 @@
-import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import React, { useRef, useEffect } from 'react';
+import { View, Text, TouchableOpacity, Animated, Platform } from 'react-native';
+import * as Haptics from 'expo-haptics';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { Link, usePathname } from 'expo-router';
+import { useRouter, usePathname } from 'expo-router';
 
-export const SideBar = () => {
-  const pathname = usePathname();
+interface NavItem {
+  icon: string;
+  label: string;
+  route: string;
+  isCenter?: boolean;
+}
 
-  const isActiveRoute = (route: string) => {
-    return pathname.startsWith(route);
+const NAV_ITEMS: NavItem[] = [
+  { icon: 'home', label: 'Início', route: '/dashboard' },
+  { icon: 'bar-chart', label: 'Detalhes', route: '/myDetailing' },
+  { icon: 'add', label: '', route: '/registrationSpent', isCenter: true },
+  { icon: 'account-balance-wallet', label: 'Carteira', route: '/wallet' },
+  { icon: 'person', label: 'Perfil', route: '/editAcount' },
+];
+
+const NavButton = ({
+  item,
+  isActive,
+  onPress,
+}: {
+  item: NavItem;
+  isActive: boolean;
+  onPress: () => void;
+}) => {
+  const scaleAnim = useRef(new Animated.Value(1)).current;
+  const dotAnim = useRef(new Animated.Value(isActive ? 1 : 0)).current;
+
+  useEffect(() => {
+    Animated.spring(dotAnim, {
+      toValue: isActive ? 1 : 0,
+      useNativeDriver: true,
+      speed: 20,
+      bounciness: 8,
+    }).start();
+  }, [isActive]);
+
+  const handlePress = () => {
+    Animated.sequence([
+      Animated.timing(scaleAnim, {
+        toValue: 0.85,
+        duration: 80,
+        useNativeDriver: true,
+      }),
+      Animated.spring(scaleAnim, {
+        toValue: 1,
+        useNativeDriver: true,
+        speed: 25,
+        bounciness: 6,
+      }),
+    ]).start();
+    onPress();
   };
 
+  if (item.isCenter) {
+    return (
+      <TouchableOpacity
+        onPress={handlePress}
+        activeOpacity={0.85}
+        className="items-center justify-center"
+      >
+        <Animated.View
+          style={{ transform: [{ scale: scaleAnim }] }}
+          className="w-14 h-14 rounded-full bg-primary items-center justify-center -mt-7"
+          style={{
+            shadowColor: '#3161B2',
+            shadowOffset: { width: 0, height: 6 },
+            shadowOpacity: 0.4,
+            shadowRadius: 10,
+            elevation: 10,
+            marginTop: -28,
+            width: 56,
+            height: 56,
+            borderRadius: 28,
+            backgroundColor: '#3161B2',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          <Icon name="add" size={28} color="#FFF" />
+        </Animated.View>
+      </TouchableOpacity>
+    );
+  }
+
   return (
-    <View style={styles.bottomNav}>
-      <Link href="/dashboard" asChild style={[styles.navItem, isActiveRoute('/dashboard') && styles.activeNav]}>
-        <View>
-          <Icon name="home" size={24} color={isActiveRoute('/dashboard') ? "#3161B2" : "#A0A0A0"} />
-        </View>
-      </Link>
+    <TouchableOpacity
+      onPress={handlePress}
+      activeOpacity={0.7}
+      className="flex-1 items-center justify-center py-2"
+    >
+      <Animated.View
+        style={{ transform: [{ scale: scaleAnim }] }}
+        className="items-center"
+      >
+        {/* Indicador ativo */}
+        <Animated.View
+          style={{
+            opacity: dotAnim,
+            transform: [{ scaleX: dotAnim }],
+            height: 3,
+            width: 20,
+            borderRadius: 2,
+            backgroundColor: '#3161B2',
+            marginBottom: 4,
+          }}
+        />
 
-      <Link href="/myDetailing" asChild style={[styles.navItem, isActiveRoute('/myDetailing') && styles.activeNav]}>
-        <View>
-          <Icon name="calendar-today" size={24} color={isActiveRoute('/myDetailing') ? "#3161B2" : "#A0A0A0"} />
-        </View>
-      </Link>
-
-      <Link href="/registrationSpent" asChild>
-        <View style={styles.navItem}>
-          <View style={styles.addButton}>
-            <Icon name="add" size={32} color="#FFF" />
-          </View>
-        </View>
-      </Link>
-
-      <Link href="/wallet" asChild style={[styles.navItem, isActiveRoute('/wallet') && styles.activeNav]}>
-        <View>
-          <Icon name="account-balance-wallet" size={24} color={isActiveRoute('/wallet') ? "#3161B2" : "#A0A0A0"} />
-        </View>
-      </Link>
-
-      <Link href="/editAcount" asChild style={[styles.navItem, isActiveRoute('/editAcount') && styles.activeNav]}>
-        <View>
-          <Icon name="person" size={24} color={isActiveRoute('/editAcount') ? "#3161B2" : "#A0A0A0"} />
-        </View>
-      </Link>
-    </View>
+        <Icon
+          name={item.icon}
+          size={22}
+          color={isActive ? '#3161B2' : '#A0AEC0'}
+        />
+        <Text
+          className="text-xs mt-1"
+          style={{
+            color: isActive ? '#3161B2' : '#A0AEC0',
+            fontWeight: isActive ? '700' : '400',
+          }}
+        >
+          {item.label}
+        </Text>
+      </Animated.View>
+    </TouchableOpacity>
   );
 };
 
-const styles = StyleSheet.create({
-  bottomNav: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    backgroundColor: '#FFF',
-    paddingVertical: 12,
-    borderTopWidth: 1,
-    borderTopColor: '#E0E0E0',
-  },
-  navItem: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    flex: 1,
-  },
-  activeNav: {
-    borderTopWidth: 2,
-    borderTopColor: '#3161B2',
-    paddingTop: 10,
-  },
-  addButton: {
-    backgroundColor: '#3161B2',
-    width: 56,
-    height: 56,
-    borderRadius: 28,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: -28,
-    shadowColor: '#000',
-    shadowOpacity: 0.2,
-    shadowRadius: 5,
-    shadowOffset: { width: 0, height: 3 },
-    elevation: 5,
-  },
-});
+export const SideBar = () => {
+  const router = useRouter();
+  const pathname = usePathname();
+
+  const isActive = (route: string) => pathname.startsWith(route);
+
+  const handleNav = (route: string) => {
+    if (Platform.OS !== 'web') {
+      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+    }
+    router.push(route as any);
+  };
+
+  return (
+    <View
+      className="flex-row items-center bg-white"
+      style={{
+        borderTopWidth: 1,
+        borderTopColor: '#EBF1F6',
+        paddingBottom: Platform.OS === 'ios' ? 20 : 8,
+        paddingTop: 4,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: -4 },
+        shadowOpacity: 0.06,
+        shadowRadius: 12,
+        elevation: 16,
+      }}
+    >
+      {NAV_ITEMS.map((item) => (
+        <NavButton
+          key={item.route}
+          item={item}
+          isActive={isActive(item.route)}
+          onPress={() => handleNav(item.route)}
+        />
+      ))}
+    </View>
+  );
+};
 
 export default SideBar;
