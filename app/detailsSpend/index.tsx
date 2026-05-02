@@ -41,7 +41,7 @@ export default function DetailsSpends() {
       {/* Card Detalhes */}
       <ScrollView
         className="flex-1 -mt-6"
-        contentContainerStyle={{ paddingHorizontal: 20, paddingBottom: 32 }}
+        contentContainerStyle={{ paddingHorizontal: 20, paddingBottom: 100 }}
         showsVerticalScrollIndicator={false}
       >
         <View className="bg-white rounded-[24px] p-6 shadow-lg shadow-[#3161B2]/10 elevation-4">
